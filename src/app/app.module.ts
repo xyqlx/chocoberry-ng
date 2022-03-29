@@ -21,6 +21,11 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TopPanelComponent } from './top-panel/top-panel.component';
 import { MatTableModule } from '@angular/material/table';
+import { CauComponent } from './cau/cau.component';
+import { NgTerminalModule } from 'ng-terminal';
+import { SshTerminalComponent } from './ssh-terminal/ssh-terminal.component';
+import { TerminalWindowComponent } from './terminal-window/terminal-window.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -29,7 +34,10 @@ import { MatTableModule } from '@angular/material/table';
     GpuComponent,
     HomeComponent,
     LoginComponent,
-    TopPanelComponent
+    TopPanelComponent,
+    CauComponent,
+    SshTerminalComponent,
+    TerminalWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +61,9 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressBarModule,
     CdkAccordionModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    NgTerminalModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent],

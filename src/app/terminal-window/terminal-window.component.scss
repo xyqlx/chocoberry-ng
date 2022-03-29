@@ -1,0 +1,17 @@
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+}
+.title-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 0px;
+}
