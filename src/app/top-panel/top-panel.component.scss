@@ -1,0 +1,41 @@
+.panel-card {
+    width: fit-content;
+}
+.card-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.performance-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+.cpu-container{
+    font-size: 32px;
+}
+.mem-used {
+    font-size: 32px;
+}
+.mem-total {
+    font-size: 18px;
+    color: gray;
+}
+.mat-column-command {
+    padding-right: 10px;
+    text-align: center;
+}
+.mat-column-user {
+    padding-right: 10px;
+    text-align: center;
+}
+.mat-column-cpu {
+    padding-right: 10px;
+    text-align: right;
+}
+.mat-column-mem {
+    padding-right: 10px;
+    text-align: right;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from './../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,13 @@ import { environment } from './../../environments/environment';
 export class ChocoService {
   private base = environment.apiUrl;
   constructor(private http: HttpClient) { }
-  get(route: string){
+  private get(route: string){
     return this.http.get(this.base + route);
   }
-  getGpu(){
-    return this.get('gpu');
+  async getAsync(route: string){
+    return await firstValueFrom(this.get(route));
+  }
+  async findProcess(pid: number){
+    return await this.getAsync('process/' + pid);
   }
 }

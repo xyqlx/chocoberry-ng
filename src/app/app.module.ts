@@ -15,6 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card'
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { TopPanelComponent } from './top-panel/top-panel.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -22,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     GpuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    TopPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressBarModule,
+    CdkAccordionModule,
+    MatExpansionModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,33 @@
+.cuda-version {
+    width: 100%;
+    text-align: center;
+}
+.gpu-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gpu-card-container {
+    width: calc(100% / 4 - 50px);
+    min-width: 200px;
+}
+.gpu-card {
+    margin: 20px;
+}
+.gpu-process-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.gpu-card-progress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.gpu-card-progress > span {
+    white-space: nowrap;
+}
+.gpu-process-detail > div {
+    overflow-wrap: break-word;
+}

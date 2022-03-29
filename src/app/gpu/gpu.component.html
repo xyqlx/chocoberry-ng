@@ -1,1 +1,45 @@
-<p>CUDA:{{cuda_version}}</p>
+<div class="cuda-version">CUDA:{{cudaVersion}}</div>
+<div class="gpu-container">
+    <div class="gpu-card-container" *ngFor="let gpu of gpus; let i = index">
+        <mat-card class="gpu-card">
+            <mat-card-title>{{gpu.name}}</mat-card-title>
+            <div class="gpu-card-progress">
+                <span>显存
+                    <strong>{{gpu.memUsed/1024 | number: '1.2-2'}}G</strong>
+                </span>
+                <mat-progress-bar mode="determinate" [value]="gpu.memUsed/gpu.memTotal*100"></mat-progress-bar>
+            </div>
+            <div class="gpu-card-progress">
+                <span>占用
+                    <strong>{{gpu.utilization | number: '2.1-1'}}%</strong>
+                </span>
+                <mat-progress-bar mode="determinate" [value]="gpu.utilization"></mat-progress-bar>
+            </div>
+            <div class="gpu-process-container">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ gpu.process ? gpu.process.user : '-' }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{ gpu.process ? gpu.process.name : '' }}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="gpu-process-detail" *ngIf="gpu.process">
+                            <div>pid={{gpu.process.pid}}</div>
+                            <div>parent={{gpu.process.ppid}}</div>
+                            <div>uid={{gpu.process.uid}}</div>
+                            <div>bin={{gpu.process.bin}}</div>
+                            <div>cmd={{gpu.process.cmd}}</div>
+                            <div *ngIf="gpu.process.cwd">cwd={{gpu.process.cwd}}</div>
+                        </div>
+                        <div *ngIf="!gpu.process">
+                            无进程信息
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </mat-card>
+    </div>
+</div>
