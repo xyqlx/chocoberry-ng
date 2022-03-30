@@ -26,6 +26,8 @@ import { NgTerminalModule } from 'ng-terminal';
 import { SshTerminalComponent } from './ssh-terminal/ssh-terminal.component';
 import { TerminalWindowComponent } from './terminal-window/terminal-window.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UploadComponent } from './upload/upload.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TopPanelComponent,
     CauComponent,
     SshTerminalComponent,
-    TerminalWindowComponent
+    TerminalWindowComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatExpansionModule,
     MatTableModule,
     NgTerminalModule,
-    DragDropModule
+    DragDropModule,
+    SocketIoModule.forRoot({ url: environment.apiUrl, options: { autoConnect: false, path: '' } })
   ],
   providers: [],
   bootstrap: [AppComponent],

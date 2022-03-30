@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Inject, InjectionToken, OnInit, ViewChild } from '@angular/core';
 import { FunctionsUsingCSI, NgTerminal } from 'ng-terminal';
+import { Socket } from 'ngx-socket-io';
 
 export const CLOSE_EVENT = new InjectionToken<{}>('CLOSE_EVENT');
 
@@ -10,10 +11,12 @@ export const CLOSE_EVENT = new InjectionToken<{}>('CLOSE_EVENT');
 })
 export class TerminalWindowComponent implements OnInit, AfterViewInit {
 
-  constructor(@Inject(CLOSE_EVENT) public closeEvent: any) { }
+  constructor(@Inject(CLOSE_EVENT) public closeEvent: any, private socket: Socket) { }
   @ViewChild('term', { static: true }) child: NgTerminal | undefined;
   ngOnInit(): void {
-
+    this.socket.connect();
+    this.socket.emit('close');
+    this.socket.fromEvent('close').subscribe(x=>console.log(x));
   }
   ngAfterViewInit(): void {
     if(!this.child){

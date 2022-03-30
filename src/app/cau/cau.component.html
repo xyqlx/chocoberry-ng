@@ -3,7 +3,7 @@
     <div>
         <span>登录账户：</span>
         <span>{{ username ? username : '无' }}</span>
-        <a *ngIf="username" (click)="logout()" href="">注销</a>
+        <button mat-button color="primary" *ngIf="username" (click)="logout()">注销</button>
     </div>
     <div *ngIf="!username" class="login-panel" [formGroup]="form">
         <mat-form-field appearance="fill">

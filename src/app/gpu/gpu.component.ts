@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { find, firstValueFrom } from 'rxjs';
 import { ChocoService } from "../choco/choco.service";
 import { interval, Subscription } from 'rxjs';
 
 declare type GPUInfo = {
   name: string, memUsed: number, memTotal: number, utilization: number,
-  process?: { pid: number, ppid: number, uid: number, user?: string, gid: number, name: string, bin: string, cmd: string, cwd?: string }
+  processes: { pid: number, ppid: number, uid: number, user?: string, gid: number, name: string, bin: string, cmd: string, cwd?: string }[]
 };
 
 @Component({
@@ -41,12 +40,23 @@ export class GpuComponent implements OnInit, OnDestroy {
         memUsed: this.getNumber(gpu['fb_memory_usage']['used']),
         memTotal: this.getNumber(gpu['fb_memory_usage']['total']),
         utilization: this.getNumber(gpu['utilization']['gpu_util']),
+        processes: []
       };
       const processes = gpu['processes'];
       if (processes !== '\n\t\t') {
-        const pid = Number(processes['process_info']['pid']);
-        const process = await this.choco.findProcess(pid);
-        gpuInfo.process = process as any;
+        if(Array.isArray(processes['process_info'])){
+          for(const p of processes['process_info']){
+            const pid = Number(p['pid']);
+            const process = await this.choco.findProcess(pid);
+            gpuInfo.processes.push(process as any);
+          }
+        }else{
+          const pid = Number(processes['process_info']['pid']);
+          if(pid !== NaN){
+            const process = await this.choco.findProcess(pid);
+            gpuInfo.processes.push(process as any);
+          }
+        }
       }
       gpus.push(gpuInfo);
     }
@@ -57,8 +67,16 @@ export class GpuComponent implements OnInit, OnDestroy {
         this.gpus[i].memUsed = gpus[i].memUsed;
         this.gpus[i].memTotal = gpus[i].memTotal;
         this.gpus[i].utilization = gpus[i].utilization;
-        if(gpus[i].process !== this.gpus[i].process){
-          this.gpus[i].process = gpus[i].process;
+        if(this.gpus[i].processes.length === gpus[i].processes.length){
+          for(let j = 0; j < this.gpus[i].processes.length; j++){
+            if(gpus[i].processes[j].pid !== this.gpus[i].processes[j].pid
+              || gpus[i].processes[j].cmd !== this.gpus[i].processes[j].cmd){
+              this.gpus[i].processes[j] = gpus[i].processes[j];
+            }
+          }
+        }
+        else{
+          this.gpus[i].processes = [...gpus[i].processes];
         }
       }
     }
