@@ -1,1 +1,16 @@
+<div class="navigator-bar">
+    <div class="site-logo">
+        <img alt="logo" src="../assets/chocolate-berry.png"/>
+        <span>Chocoberry</span>
+    </div>
+    <div class="router">
+        <button mat-button [routerLink]="['home']">温暖的家</button>
+        <button mat-button [routerLink]="['stat']">统计信息</button>
+        <button mat-button [routerLink]="['notify']">通知规则</button>
+        <button mat-button [routerLink]="['user']">用户设置</button>
+    </div>
+    <div class="end-part">
+        <button mat-stroked-button color="primary">登出</button>
+    </div>
+</div>
 <router-outlet></router-outlet>

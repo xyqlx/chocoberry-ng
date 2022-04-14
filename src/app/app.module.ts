@@ -26,8 +26,11 @@ import { SshTerminalComponent } from './ssh-terminal/ssh-terminal.component';
 import { TerminalWindowComponent } from './terminal-window/terminal-window.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UploadComponent } from './upload/upload.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmailComponent } from './email/email.component';
+import { UserComponent } from './user/user.component';
+import { NotifyComponent } from './notify/notify.component';
+import { StatComponent } from './stat/stat.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { EmailComponent } from './email/email.component';
     SshTerminalComponent,
     TerminalWindowComponent,
     UploadComponent,
-    EmailComponent
+    EmailComponent,
+    UserComponent,
+    NotifyComponent,
+    StatComponent
   ],
   imports: [
     BrowserModule,
