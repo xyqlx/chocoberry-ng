@@ -1,17 +1,18 @@
 <mat-card class="panel-card">
-    <mat-card-title>性能</mat-card-title>
+    <mat-card-title>性能{{this.shouldUpdate ? '' : '（暂停中）'}}</mat-card-title>
     <div class="card-inner">
         <div class="performance-container">
             <div class="cpu-container"><span *ngIf="cpuInfo">{{cpuInfo.percent | number: '1.1-1'}}%</span></div>
             <div><span *ngIf="memInfo">
-                <span class="mem-used">{{memInfo.total - memInfo.free | number: '1.1-1'}}</span>
-                <span class="mem-total">/{{memInfo.total | number: '1.1-1'}}G</span>
-            </span></div>
+                    <span class="mem-used">{{memInfo.total - memInfo.free | number: '1.1-1'}}</span>
+                    <span class="mem-total">/{{memInfo.total | number: '1.1-1'}}G</span>
+                </span></div>
         </div>
-        <table mat-table [dataSource]="topInfo" class="mat-elevation-z8">
+        <table mat-table [dataSource]="topInfo" (mouseenter)="stopUpdate()" (mouseleave)="continueUpdate()" class="mat-elevation-z8">
             <ng-container matColumnDef="command">
                 <th mat-header-cell *matHeaderCellDef> Cmd </th>
-                <td mat-cell *matCellDef="let element"> {{element.COMMAND}} </td>
+                <td mat-cell *matCellDef="let element" [matTooltip]="element?.process?.cmd"
+                    [matTooltipHideDelay]="200" matTooltipPosition="left"> {{element.COMMAND}} </td>
             </ng-container>
             <ng-container matColumnDef="user">
                 <th mat-header-cell *matHeaderCellDef> User </th>

@@ -1,7 +1,8 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, Injector, OnInit } from '@angular/core';
-import { CLOSE_EVENT, TerminalWindowComponent } from '../terminal-window/terminal-window.component';
+import { FormControl, FormGroup } from '@angular/forms';
+import { CLOSE_EVENT, SSH_PASSWORD, TerminalWindowComponent } from '../terminal-window/terminal-window.component';
 
 @Component({
   selector: 'app-ssh-terminal',
@@ -14,6 +15,11 @@ export class SshTerminalComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  form: FormGroup = new FormGroup({
+    'password': new FormControl('')
+  });
+  hide = true;
 
   connect(){
     const config = new OverlayConfig();
@@ -29,7 +35,10 @@ export class SshTerminalComponent implements OnInit {
       providers: [
         { provide: CLOSE_EVENT, useValue: () => {
           overlayRef.dispose(); // 销毁overlay层
-        } }
+        } },
+        {
+          provide: SSH_PASSWORD, useValue: this.form.value.password
+        }
       ]
     });
     const componentPortal = new ComponentPortal(TerminalWindowComponent, null, injector);

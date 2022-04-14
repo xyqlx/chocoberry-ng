@@ -1,7 +1,7 @@
 <div class="terminal-container" cdkDrag>
-    <div class="title-bar">
+    <div class="title-bar" cdkDragHandle>
         <div>窗口</div>
-        <button mat-raised-button color="primary" (click)="close()">Close</button>
+        <button mat-raised-button color="primary" (click)="close()">❌</button>
     </div>
-    <ng-terminal #term [rows]="10" [cols]="20"></ng-terminal>
+    <div #term></div>
 </div>

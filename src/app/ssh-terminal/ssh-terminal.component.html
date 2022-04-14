@@ -1,4 +1,14 @@
 <mat-card>
     <mat-card-title>SSH</mat-card-title>
-    <button mat-raised-button color="primary" (click)="connect()">Connect</button>
+    <div [formGroup]="form">
+        <mat-form-field appearance="fill">
+            <mat-label>SSH密码</mat-label>
+            <input formControlName="password" id="ssh_password" name="ssh_password" autocomplete="ssh_password" matInput
+                [type]="hide ? 'password' : 'text'" (keydown.enter)="connect()"/>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="connect()">登录</button>
 </mat-card>

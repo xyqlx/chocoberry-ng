@@ -22,12 +22,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TopPanelComponent } from './top-panel/top-panel.component';
 import { MatTableModule } from '@angular/material/table';
 import { CauComponent } from './cau/cau.component';
-import { NgTerminalModule } from 'ng-terminal';
 import { SshTerminalComponent } from './ssh-terminal/ssh-terminal.component';
 import { TerminalWindowComponent } from './terminal-window/terminal-window.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UploadComponent } from './upload/upload.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { EmailComponent } from './email/email.component';
 
 
 @NgModule({
@@ -40,7 +40,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
     CauComponent,
     SshTerminalComponent,
     TerminalWindowComponent,
-    UploadComponent
+    UploadComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +66,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
     CdkAccordionModule,
     MatExpansionModule,
     MatTableModule,
-    NgTerminalModule,
     DragDropModule,
-    SocketIoModule.forRoot({ url: environment.apiUrl, options: { autoConnect: false, path: '' } })
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
