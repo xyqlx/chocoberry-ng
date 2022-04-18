@@ -47,14 +47,19 @@ export class GpuComponent implements OnInit, OnDestroy {
         if(Array.isArray(processes['process_info'])){
           for(const p of processes['process_info']){
             const pid = Number(p['pid']);
-            const process = await this.choco.findProcess(pid);
-            gpuInfo.processes.push(process as any);
+            try{
+              const process = await this.choco.findProcess(pid);
+              gpuInfo.processes.push(process as any);
+            }
+            catch{}
           }
         }else{
           const pid = Number(processes['process_info']['pid']);
           if(pid !== NaN){
-            const process = await this.choco.findProcess(pid);
-            gpuInfo.processes.push(process as any);
+            try {
+              const process = await this.choco.findProcess(pid);
+              gpuInfo.processes.push(process as any);
+            }catch{}
           }
         }
       }

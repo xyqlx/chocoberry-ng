@@ -19,33 +19,39 @@ export class TopPanelComponent implements OnInit {
   constructor(private choco: ChocoService) {
     const source = interval(2000);
     this.topSubscription = source.subscribe(async () => {
-      if(this.shouldUpdate){
+      if (this.shouldUpdate) {
         await this.queryTop();
       }
       await this.queryCPU();
       await this.queryMem();
     });
   }
-  continueUpdate(){
+  continueUpdate() {
     this.shouldUpdate = true;
   }
-  stopUpdate(){
+  stopUpdate() {
     this.shouldUpdate = false;
   }
 
-  async queryTop(){
+  async queryTop() {
     const topInfo = await this.choco.getAsync(`process/top`) as any[];
     this.topInfo = topInfo.slice(0, 5);
     // query process for each topInfo
-    for(const info of this.topInfo){
-      info.process = await this.choco.getAsync(`process/${info.PID}`);
+    for (const info of this.topInfo) {
+      const pid = Number(info.PID);
+      if (pid !== NaN) {
+        try {
+          const process = await this.choco.findProcess(pid);
+          info.process = process as any;
+        } catch { }
+      }
       // console.log(info.process)
     }
   }
-  async queryCPU(){
+  async queryCPU() {
     this.cpuInfo = await this.choco.getAsync(`cpu`);
   }
-  async queryMem(){
+  async queryMem() {
     this.memInfo = await this.choco.getAsync(`memory`);
   }
 
