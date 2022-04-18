@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChocoService } from '../choco/choco.service';
 
 @Component({
   selector: 'app-stat',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private choco: ChocoService) { }
+  data: any;
+  async ngOnInit() {
+    this.data = await this.choco.getAsync('tasks/log/performance?days=1');
   }
 
 }

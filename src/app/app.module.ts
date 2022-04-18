@@ -31,6 +31,8 @@ import { EmailComponent } from './email/email.component';
 import { UserComponent } from './user/user.component';
 import { NotifyComponent } from './notify/notify.component';
 import { StatComponent } from './stat/stat.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { StatComponent } from './stat/stat.component';
     EmailComponent,
     UserComponent,
     NotifyComponent,
-    StatComponent
+    StatComponent,
+    CpuMemChartComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,14 @@ import { StatComponent } from './stat/stat.component';
     MatTableModule,
     DragDropModule,
     MatTooltipModule,
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to https://www.npmjs.com/package/ngx-echarts#custom-build section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
