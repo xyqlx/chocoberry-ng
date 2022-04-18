@@ -33,6 +33,8 @@ import { NotifyComponent } from './notify/notify.component';
 import { StatComponent } from './stat/stat.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
+import { GpuChartComponent } from './gpu-chart/gpu-chart.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
     UserComponent,
     NotifyComponent,
     StatComponent,
-    CpuMemChartComponent
+    CpuMemChartComponent,
+    GpuChartComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +88,7 @@ import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

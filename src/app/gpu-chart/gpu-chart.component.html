@@ -1,0 +1,4 @@
+<mat-card>
+    <mat-card-title>GPU{{_gpuIndex}}统计</mat-card-title>
+    <div *ngIf="!gpuUndefined && chartOption" echarts [options]="chartOption" class="demo-chart"></div>
+</mat-card>
