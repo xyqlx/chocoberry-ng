@@ -1,5 +1,13 @@
 <div class="cuda-version">CUDA:{{cudaVersion}}</div>
 <div class="gpu-container">
+    <div class="gpu-card-container" *ngIf="gpus.length === 0">
+        <mat-card class="gpu-card">
+            <mat-card-title>显卡</mat-card-title>
+            <div class="gpu-card-loading-spinner">
+                <mat-spinner [diameter]="50"></mat-spinner>
+            </div>
+        </mat-card>
+    </div>
     <div class="gpu-card-container" *ngFor="let gpu of gpus; let i = index">
         <mat-card class="gpu-card">
             <mat-card-title>{{gpu.name}}</mat-card-title>

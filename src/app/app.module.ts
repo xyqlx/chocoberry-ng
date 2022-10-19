@@ -35,6 +35,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
 import { GpuChartComponent } from './gpu-chart/gpu-chart.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
