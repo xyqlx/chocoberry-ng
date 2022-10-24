@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { ECharts, EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-gpu-chart',
@@ -23,7 +23,18 @@ export class GpuChartComponent implements OnInit {
   _data: any[] | undefined;
   @Input('data') set data(data: any[] | undefined) {
     this._data = data;
+    if(data?.length === 0){
+      this.chart?.showLoading();
+    }else{
+      this.chart?.hideLoading();
+    }
     this.updateData();
+  }
+
+  chart?: ECharts;
+  onChartInit(ec: ECharts) {
+    this.chart = ec;
+    console.log(this.chart);
   }
 
   updateData() {

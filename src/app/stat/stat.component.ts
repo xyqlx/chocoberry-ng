@@ -13,13 +13,14 @@ export class StatComponent implements OnInit {
   data: any;
   gpuCount = 0;
   async ngOnInit() {
-    this.data = await this.choco.getAsync('tasks/log/performance?days=1');
+    this.data = await this.choco.getAsync('tasks/log/performance?days=1&sampleInterval=1');
     // numbers of gpu
     const gpu = this.data[0].gpu;
     this.gpuCount = gpu.length;
   }
   async timeChange(event: MatButtonToggleChange){
+    this.data = [];
     const days = event.value;
-    this.data = await this.choco.getAsync(`tasks/log/performance?days=${days}`);
+    this.data = await this.choco.getAsync(`tasks/log/performance?days=${days}&sampleInterval=20`);
   }
 }

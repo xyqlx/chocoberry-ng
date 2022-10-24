@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { ECharts, EChartsOption } from 'echarts';
 import { squeezeMetric } from '../tools/metric'
 
 @Component({
@@ -15,6 +15,11 @@ export class CpuMemChartComponent implements OnInit {
   @Input('data') set data(data: any[] | undefined) {
     if(!data){
       return;
+    }
+    if(data?.length === 0){
+      this.chart?.showLoading();
+    }else{
+      this.chart?.hideLoading();
     }
     // ISO format to Date
     const cpu = data.map(item => [new Date(item.time), item.cpu.percent]);
@@ -105,6 +110,12 @@ export class CpuMemChartComponent implements OnInit {
         }
       ],
     };
+  }
+
+  chart?: ECharts;
+  onChartInit(ec: ECharts) {
+    this.chart = ec;
+    console.log(this.chart);
   }
 
   ngOnInit(): void {
