@@ -28,7 +28,9 @@
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                {{ process ? process.user : '-' }}
+                                <span>{{ process ? process.user : '-' }}</span>
+                                <span>🕑</span>
+                                <span>{{ (process && process.starttime) ? getDurationFromNow(process.starttime) : '' }}</span>
                             </mat-panel-title>
                             <mat-panel-description>
                                 {{ process ? process.name : '' }}
@@ -40,6 +42,7 @@
                             <div>uid={{process.uid}}</div>
                             <div>bin={{process.bin}}</div>
                             <div>cmd={{process.cmd}}</div>
+                            <div *ngIf="process.starttime">lstart={{getReadableTime(process.starttime)}}</div>
                             <div *ngIf="process.cwd">cwd={{process.cwd}}</div>
                         </div>
                         <div *ngIf="!process">

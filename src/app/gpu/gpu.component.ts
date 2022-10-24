@@ -4,7 +4,7 @@ import { interval, Subscription } from 'rxjs';
 
 declare type GPUInfo = {
   name: string, memUsed: number, memTotal: number, utilization: number,
-  processes: { pid: number, ppid: number, uid: number, user?: string, gid: number, name: string, bin: string, cmd: string, cwd?: string }[]
+  processes: { pid: number, ppid: number, uid: number, user?: string, gid: number, name: string, bin: string, cmd: string, cwd?: string, starttime?: string }[]
 };
 
 @Component({
@@ -93,5 +93,28 @@ export class GpuComponent implements OnInit, OnDestroy {
       return 0;
     }
     return Number(result[0]);
+  }
+  getReadableTime(rawText: string) {
+    const date = new Date(rawText);
+    return date.toLocaleString();
+  }
+  getDurationFromNow(rawDateText: string){
+    const date = new Date(rawDateText);
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    if(days > 0){
+      return `${days}d`;
+    }
+    if(hours > 0){
+      return `${hours}h`;
+    }
+    if(minutes > 0){
+      return `${minutes}m`;
+    }
+    return `${seconds}s`;
   }
 }
