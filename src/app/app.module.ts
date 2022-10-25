@@ -65,7 +65,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       config: {
         tokenGetter: () => localStorage.getItem('access_token'),
         allowedDomains: [environment.apiDomain],
-        disallowedRoutes: [environment.apiDomain + '/auth/login'],
+        disallowedRoutes: [
+          environment.apiDomain + '/auth/login',
+          environment.apiDomain + '/auth/register'],
       }
     }),
     OverlayModule,

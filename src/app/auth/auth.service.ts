@@ -14,11 +14,17 @@ export class AuthService {
     return this.http.post<{ access_token: string }>(this.base + 'auth/login', { username, password })
       .pipe(tap(res => localStorage.setItem('access_token', res.access_token)));
   }
-  register(username: string, password: string) {
-    return this.http.post<{ access_token: string }>(this.base + 'auth/login', { username, password});
+  register(username: string, password: string, linuxUser: string, email: string) {
+    return this.http.post<{ access_token: string }>(this.base + 'auth/register', { username, password, linuxUser, email })
+      .pipe(tap(res => localStorage.setItem('access_token', res.access_token)));
   }
   logout() {
     localStorage.removeItem('access_token');
+  }
+  destroy(){
+    return this.http.post(this.base + 'auth/destroy', { }).pipe(
+      tap(() => this.logout())
+    );
   }
   public get loggedIn(): boolean{
     const token = localStorage.getItem('access_token');

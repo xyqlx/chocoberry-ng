@@ -10,7 +10,7 @@
         <button mat-button [routerLink]="['user']">用户设置</button>
     </div>
     <div class="end-part">
-        <button mat-stroked-button color="primary">登出</button>
+        <button mat-stroked-button color="primary" (click)="logout()">登出</button>
     </div>
 </div>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="loggedin"></router-outlet>
