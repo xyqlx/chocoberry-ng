@@ -26,6 +26,9 @@ export class AuthService {
       tap(() => this.logout())
     );
   }
+  getUserInfo(){
+    return this.http.get(this.base + 'auth/userinfo');
+  }
   public get loggedIn(): boolean{
     const token = localStorage.getItem('access_token');
     // 输出凭证过期时间

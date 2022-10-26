@@ -1,3 +1,26 @@
 <div class="main">
-    <button mat-raised-button color="warn" (click)="destroy()">销毁账户</button>
+    <mat-card>
+        <mat-card-title>账户信息</mat-card-title>
+        <div *ngIf="!userInfo">
+            <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
+        <div *ngIf="userInfo">
+            <div>
+                <span>用户名：</span>
+                <span>{{ userInfo.name }}</span>
+            </div>
+            <div>
+                <span>linux用户名：</span>
+                <span>{{ userInfo.linuxUser }}</span>
+            </div>
+            <div>
+                <span>邮箱：</span>
+                <span>{{ userInfo.email }}</span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button mat-raised-button color="warn" (click)="destroy()">销毁账户</button>
+        </div>
+    </mat-card>
+    
 </div>

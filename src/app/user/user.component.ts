@@ -12,7 +12,11 @@ export class UserComponent implements OnInit {
     private authService: AuthService
   ) { }
 
+  userInfo?: {name: string, linuxUser: string, email: string};
   ngOnInit(): void {
+    this.authService.getUserInfo().subscribe(x=>{
+      this.userInfo = x as {name: string, linuxUser: string, email: string};
+    })
   }
 
   destroy(){
