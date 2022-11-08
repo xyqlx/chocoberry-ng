@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -28,6 +28,17 @@ export class AuthService {
   }
   getUserInfo(){
     return this.http.get(this.base + 'auth/userinfo');
+  }
+  getPermissions(){
+    return this.http.get(this.base + 'auth/permissions').pipe(map(x=>x as string[]));
+  }
+  isOpenRegister(){
+    return this.http.get(this.base + 'auth/registerState').pipe(
+      map(v=>(v as {isOpen: boolean}).isOpen)
+    )
+  }
+  setRegisterState(isOpen: boolean){
+    return this.http.post(this.base + 'auth/registerState', { isOpen });
   }
   public get loggedIn(): boolean{
     const token = localStorage.getItem('access_token');

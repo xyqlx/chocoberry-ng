@@ -14,7 +14,7 @@
         <div class="error-info">{{errorInfo}}</div>
         <div class="button-container">
             <button mat-raised-button color="primary" (click)="login()">登录</button>
-            <button mat-stroked-button color="primary" (click)="mode = 'register'">切换到注册</button>
+            <button mat-stroked-button color="primary" *ngIf="isOpenRegister" (click)="mode = 'register'">切换到注册</button>
         </div>
     </div>
     <div *ngIf="mode === 'register'" [formGroup]="registerForm">

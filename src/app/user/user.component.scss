@@ -1,7 +1,10 @@
 .main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
 }
 .button-container {
     margin-top: 10px;

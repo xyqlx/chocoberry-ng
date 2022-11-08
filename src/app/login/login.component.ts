@@ -17,7 +17,11 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
   mode: 'login' | 'register' = 'login';
   errorInfo: string = '';
+  isOpenRegister = false;
   ngOnInit(): void {
+    this.auth.isOpenRegister().subscribe(x => { 
+      this.isOpenRegister = x;
+    });
   }
   form: FormGroup = new FormGroup({
     'username': new FormControl(''),
@@ -29,17 +33,17 @@ export class LoginComponent implements OnInit {
     'linuxUser': new FormControl(''),
     'email': new FormControl(''),
   });
-  login(){
+  login() {
     const value = this.form.value;
     this.auth.login(value.username, value.password)
-      .pipe(catchError(err => { this.errorInfo = err['error']['message']; return of();}))
-      .subscribe(res => {this.loginEvent();});
+      .pipe(catchError(err => { this.errorInfo = err['error']['message']; return of(); }))
+      .subscribe(res => { this.loginEvent(); });
   }
-  register(){
+  register() {
     const value = this.registerForm.value;
     this.auth.register(value.username, value.password, value.linuxUser, value.email)
-      .pipe(catchError(err => { this.errorInfo = err['error']['message']; return of();}))
-      .subscribe(res => {this.loginEvent();});
+      .pipe(catchError(err => { this.errorInfo = err['error']['message']; return of(); }))
+      .subscribe(res => { this.loginEvent(); });
   }
 
 }
