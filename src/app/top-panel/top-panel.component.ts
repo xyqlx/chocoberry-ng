@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { ChocoService } from '../choco/choco.service';
 
@@ -7,7 +7,7 @@ import { ChocoService } from '../choco/choco.service';
   templateUrl: './top-panel.component.html',
   styleUrls: ['./top-panel.component.scss']
 })
-export class TopPanelComponent implements OnInit {
+export class TopPanelComponent implements OnInit, OnDestroy {
   topSubscription: Subscription;
 
   topInfo: any[] = [];
@@ -39,7 +39,7 @@ export class TopPanelComponent implements OnInit {
     // query process for each topInfo
     for (const info of this.topInfo) {
       const pid = Number(info.PID);
-      if (pid !== NaN) {
+      if (!Number.isNaN(pid)) {
         try {
           const process = await this.choco.findProcess(pid);
           info.process = process as any;

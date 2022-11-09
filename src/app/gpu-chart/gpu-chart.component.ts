@@ -34,7 +34,7 @@ export class GpuChartComponent implements OnInit {
   chart?: ECharts;
   onChartInit(ec: ECharts) {
     this.chart = ec;
-    console.log(this.chart);
+    // console.log(this.chart);
   }
 
   updateData() {

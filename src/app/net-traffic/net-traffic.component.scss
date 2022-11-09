@@ -1,0 +1,28 @@
+.panel-card {
+    width: fit-content;
+}
+.card-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.mat-column-name {
+    padding-right: 10px;
+    text-align: center;
+}
+.mat-column-pid {
+    padding-right: 10px;
+    text-align: center;
+}
+.mat-column-user {
+    padding-right: 10px;
+    text-align: center;
+}
+.mat-column-sent {
+    padding-right: 15px;
+    text-align: right;
+}
+.mat-column-received {
+    padding-right: 15px;
+    text-align: right;
+}

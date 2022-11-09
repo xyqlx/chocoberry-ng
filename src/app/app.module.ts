@@ -36,6 +36,8 @@ import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
 import { GpuChartComponent } from './gpu-chart/gpu-chart.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NetTrafficComponent } from './net-traffic/net-traffic.component';
+import { NetTrafficPipe } from './net-traffic/net-traffic.pipe';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NotifyComponent,
     StatComponent,
     CpuMemChartComponent,
-    GpuChartComponent
+    GpuChartComponent,
+    NetTrafficComponent,
+    NetTrafficPipe
   ],
   imports: [
     BrowserModule,
