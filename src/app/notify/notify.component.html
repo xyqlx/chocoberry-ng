@@ -1,14 +1,7 @@
 <div class="main">
     <div class="notification-container">
-        <div class="add-notification-container">
-            <mat-card>
-                <mat-card-title>添加通知</mat-card-title>
-                <div class="add-notification-icon">
-                    <span>
-                        ➕
-                    </span>
-                </div>
-            </mat-card>
-        </div>
+        <app-trigger *ngFor="let trigger of triggers" [trigger]="trigger">
+        </app-trigger>
+        <app-add-trigger (addTriggerEvent)="addTrigger($event)"></app-add-trigger>
     </div>
 </div>

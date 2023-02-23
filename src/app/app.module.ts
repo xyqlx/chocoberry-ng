@@ -38,6 +38,11 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NetTrafficComponent } from './net-traffic/net-traffic.component';
 import { NetTrafficPipe } from './net-traffic/net-traffic.pipe';
+import { TriggerComponent } from './notify/trigger/trigger.component';
+import { AddTriggerComponent } from './notify/add-trigger/add-trigger.component';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { HpcComponent } from './hpc/hpc.component';
 
 
 @NgModule({
@@ -58,7 +63,10 @@ import { NetTrafficPipe } from './net-traffic/net-traffic.pipe';
     CpuMemChartComponent,
     GpuChartComponent,
     NetTrafficComponent,
-    NetTrafficPipe
+    NetTrafficPipe,
+    TriggerComponent,
+    AddTriggerComponent,
+    HpcComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +104,9 @@ import { NetTrafficPipe } from './net-traffic/net-traffic.pipe';
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
     MatButtonToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
