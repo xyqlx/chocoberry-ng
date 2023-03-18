@@ -42,7 +42,6 @@ import { TriggerComponent } from './notify/trigger/trigger.component';
 import { AddTriggerComponent } from './notify/add-trigger/add-trigger.component';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { HpcComponent } from './hpc/hpc.component';
 
 
 @NgModule({
@@ -66,7 +65,6 @@ import { HpcComponent } from './hpc/hpc.component';
     NetTrafficPipe,
     TriggerComponent,
     AddTriggerComponent,
-    HpcComponent
   ],
   imports: [
     BrowserModule,
