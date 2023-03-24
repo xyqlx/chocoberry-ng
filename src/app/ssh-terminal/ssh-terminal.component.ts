@@ -1,7 +1,7 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, Injector, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CLOSE_EVENT, SSH_PASSWORD, TerminalWindowComponent } from '../terminal-window/terminal-window.component';
 
 @Component({
@@ -16,8 +16,8 @@ export class SshTerminalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  form: FormGroup = new FormGroup({
-    'password': new FormControl('')
+  form: UntypedFormGroup = new UntypedFormGroup({
+    'password': new UntypedFormControl('')
   });
   hide = true;
 

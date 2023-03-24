@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ChocoService } from '../choco/choco.service';
 
 @Component({
@@ -13,9 +13,9 @@ export class CauComponent implements OnInit {
 
   username = '';
   hide = true;
-  form: FormGroup = new FormGroup({
-    'username': new FormControl(''),
-    'password': new FormControl('')
+  form: UntypedFormGroup = new UntypedFormGroup({
+    'username': new UntypedFormControl(''),
+    'password': new UntypedFormControl('')
   });
 
   async ngOnInit(): Promise<void> {

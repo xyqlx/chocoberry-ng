@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ChocoService } from '../choco/choco.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class EmailComponent implements OnInit {
     private choco: ChocoService
   ) { }
 
-  form: FormGroup = new FormGroup({
-    'content': new FormControl('')
+  form: UntypedFormGroup = new UntypedFormGroup({
+    'content': new UntypedFormControl('')
   });
 
   async send() {
