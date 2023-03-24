@@ -10,23 +10,23 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LoginComponent } from './login/login.component'
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card'
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card'
+import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TopPanelComponent } from './top-panel/top-panel.component';
-import { MatTableModule } from '@angular/material/table';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
 import { CauComponent } from './cau/cau.component';
 import { SshTerminalComponent } from './ssh-terminal/ssh-terminal.component';
 import { TerminalWindowComponent } from './terminal-window/terminal-window.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UploadComponent } from './upload/upload.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 import { EmailComponent } from './email/email.component';
 import { UserComponent } from './user/user.component';
 import { NotifyComponent } from './notify/notify.component';
@@ -35,12 +35,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { CpuMemChartComponent } from './cpu-mem-chart/cpu-mem-chart.component';
 import { GpuChartComponent } from './gpu-chart/gpu-chart.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
 import { NetTrafficComponent } from './net-traffic/net-traffic.component';
 import { NetTrafficPipe } from './net-traffic/net-traffic.pipe';
 import { TriggerComponent } from './notify/trigger/trigger.component';
 import { AddTriggerComponent } from './notify/add-trigger/add-trigger.component';
-import { MatSelectModule } from '@angular/material/select';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { FormsModule } from '@angular/forms';
 
 
