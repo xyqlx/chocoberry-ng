@@ -49,6 +49,7 @@ export class GpuComponent implements OnInit, OnDestroy {
             const pid = Number(p['pid']);
             try{
               const process = await this.choco.findProcess(pid);
+              (process as any).usedmemory = this.getNumber(p['used_memory']) ?? 0;
               gpuInfo.processes.push(process as any);
             }
             catch{}
@@ -58,6 +59,7 @@ export class GpuComponent implements OnInit, OnDestroy {
           if(!isNaN(pid)){
             try {
               const process = await this.choco.findProcess(pid);
+              (process as any).usedmemory = this.getNumber(processes['process_info']['used_memory']) ?? 0;
               gpuInfo.processes.push(process as any);
             }catch{}
           }
