@@ -46,6 +46,7 @@ import { MultiProgressComponent } from './multi-progress/multi-progress.componen
 import { SettingsComponent } from './settings/settings.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     FormsModule,
     DialogModule,
-    MatSliderModule
+    MatSliderModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

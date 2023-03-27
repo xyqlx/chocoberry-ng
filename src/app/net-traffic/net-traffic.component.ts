@@ -31,7 +31,7 @@ export class NetTrafficComponent implements OnInit, OnDestroy {
 
   async queryTraffic() {
     const trafficInfo = (await this.choco.getAsync(`net-traffic`)) as any[];
-    this.trafficInfo = trafficInfo.slice(0, 5);
+    this.trafficInfo = trafficInfo.slice(0, 3);
     // query process for each topInfo
     for (const info of this.trafficInfo) {
       // console.log(info.process)
