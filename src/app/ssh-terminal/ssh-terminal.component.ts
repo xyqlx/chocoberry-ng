@@ -2,28 +2,31 @@ import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, Injector, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { CLOSE_EVENT, SSH_PASSWORD, TerminalWindowComponent } from '../terminal-window/terminal-window.component';
+import {
+  CLOSE_EVENT,
+  SSH_PASSWORD,
+  TerminalWindowComponent,
+} from '../terminal-window/terminal-window.component';
 
 @Component({
   selector: 'app-ssh-terminal',
   templateUrl: './ssh-terminal.component.html',
-  styleUrls: ['./ssh-terminal.component.scss']
+  styleUrls: ['./ssh-terminal.component.scss'],
 })
 export class SshTerminalComponent implements OnInit {
+  constructor(private overlay: Overlay, private injector: Injector) {}
 
-  constructor(private overlay: Overlay, private injector: Injector) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   form: UntypedFormGroup = new UntypedFormGroup({
-    'password': new UntypedFormControl('')
+    password: new UntypedFormControl(''),
   });
   hide = true;
 
-  connect(){
+  connect() {
     const config = new OverlayConfig();
-    config.positionStrategy = this.overlay.position()
+    config.positionStrategy = this.overlay
+      .position()
       .global() // 全局显示
       .centerHorizontally() // 水平居中
       .centerVertically(); // 垂直居中
@@ -33,15 +36,23 @@ export class SshTerminalComponent implements OnInit {
     const injector = Injector.create({
       parent: this.injector,
       providers: [
-        { provide: CLOSE_EVENT, useValue: () => {
-          overlayRef.dispose(); // 销毁overlay层
-        } },
         {
-          provide: SSH_PASSWORD, useValue: this.form.value.password
-        }
-      ]
+          provide: CLOSE_EVENT,
+          useValue: () => {
+            overlayRef.dispose(); // 销毁overlay层
+          },
+        },
+        {
+          provide: SSH_PASSWORD,
+          useValue: this.form.value.password,
+        },
+      ],
     });
-    const componentPortal = new ComponentPortal(TerminalWindowComponent, null, injector);
+    const componentPortal = new ComponentPortal(
+      TerminalWindowComponent,
+      null,
+      injector
+    );
     overlayRef.attach(componentPortal);
   }
 }

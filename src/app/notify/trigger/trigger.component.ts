@@ -4,15 +4,18 @@ import { Trigger } from '../trigger';
 @Component({
   selector: 'app-trigger',
   templateUrl: './trigger.component.html',
-  styleUrls: ['./trigger.component.scss']
+  styleUrls: ['./trigger.component.scss'],
 })
 export class TriggerComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() trigger: Trigger = new Trigger(
+    'time',
+    1,
+    {},
+    'email',
+    new Date().getTime()
+  );
 
-  @Input() trigger: Trigger = new Trigger('time', 1, {}, 'email', new Date().getTime());
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

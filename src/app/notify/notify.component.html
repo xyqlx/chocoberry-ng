@@ -1,7 +1,7 @@
 <div class="main">
-    <div class="notification-container">
-        <app-trigger *ngFor="let trigger of triggers" [trigger]="trigger">
-        </app-trigger>
-        <app-add-trigger (addTriggerEvent)="addTrigger($event)"></app-add-trigger>
-    </div>
+  <div class="notification-container">
+    <app-trigger *ngFor="let trigger of triggers" [trigger]="trigger">
+    </app-trigger>
+    <app-add-trigger (addTriggerEvent)="addTrigger($event)"></app-add-trigger>
+  </div>
 </div>

@@ -8,9 +8,8 @@ describe('MultiProgressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MultiProgressComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiProgressComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MultiProgressComponent);
     component = fixture.componentInstance;

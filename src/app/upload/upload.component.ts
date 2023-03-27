@@ -6,7 +6,7 @@ import { ChocoService } from '../choco/choco.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent implements OnInit {
   currentFile?: File;
@@ -14,10 +14,12 @@ export class UploadComponent implements OnInit {
   message = '';
   fileName = '选择文件';
   uploadPath = '';
-  constructor(private choco: ChocoService) { }
+  constructor(private choco: ChocoService) {}
 
   async ngOnInit(): Promise<void> {
-    this.uploadPath = (await this.choco.getAsync('upload/path') as { path: string })['path'];
+    this.uploadPath = (
+      (await this.choco.getAsync('upload/path')) as { path: string }
+    )['path'];
   }
 
   selectFile(event: any): void {
@@ -31,28 +33,27 @@ export class UploadComponent implements OnInit {
   }
   upload(): void {
     this.progress = 0;
-    this.message = "";
+    this.message = '';
     if (this.currentFile) {
-      this.choco.upload(this.currentFile).subscribe(
-        {
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round(100 * event.loaded / event.total);
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.progress = 0;
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = '上传文件失败!';
-            }
-            this.currentFile = undefined;
+      this.choco.upload(this.currentFile).subscribe({
+        next: (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round((100 * event.loaded) / event.total);
+          } else if (event instanceof HttpResponse) {
+            this.message = event.body.message;
           }
-        });
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.progress = 0;
+          if (err.error && err.error.message) {
+            this.message = err.error.message;
+          } else {
+            this.message = '上传文件失败!';
+          }
+          this.currentFile = undefined;
+        },
+      });
     }
   }
 }

@@ -8,9 +8,8 @@ describe('CpuMemChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CpuMemChartComponent ]
-    })
-    .compileComponents();
+      declarations: [CpuMemChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

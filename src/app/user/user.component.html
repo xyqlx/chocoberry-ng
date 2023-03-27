@@ -1,40 +1,47 @@
 <div class="main">
-    <mat-card>
-        <mat-card-header><mat-card-title>账户信息</mat-card-title></mat-card-header>
-<mat-card-content>
-        <div *ngIf="!userInfo">
-            <mat-spinner [diameter]="50"></mat-spinner>
-        </div>
-        <div *ngIf="userInfo">
-            <div>
-                <span>用户名：</span>
-                <span>{{ userInfo.name }}</span>
-            </div>
-            <div>
-                <span>linux用户名：</span>
-                <span>{{ userInfo.linuxUser }}</span>
-            </div>
-            <div>
-                <span>邮箱：</span>
-                <span>{{ userInfo.email }}</span>
-            </div>
-        </div>
-        <div class="button-container">
-            <button mat-raised-button color="warn" (click)="destroy()">销毁账户</button>
-        </div>
-    </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="hasRegisterStateControlPermission">
-        <mat-card-header><mat-card-title>开放注册</mat-card-title></mat-card-header>
+  <mat-card>
+    <mat-card-header><mat-card-title>账户信息</mat-card-title></mat-card-header>
     <mat-card-content>
+      <div *ngIf="!userInfo">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </div>
+      <div *ngIf="userInfo">
         <div>
-            <span>目前状态：</span>
-            <span>{{ isOpenRegister ? '开放' : '关闭' }}</span>
+          <span>用户名：</span>
+          <span>{{ userInfo.name }}</span>
         </div>
-        <div class="button-container">
-            <button mat-raised-button color="primary" (click)="setRegisterState(!isOpenRegister)">{{ isOpenRegister ? '禁止注册' : '开放注册' }}</button>
+        <div>
+          <span>linux用户名：</span>
+          <span>{{ userInfo.linuxUser }}</span>
         </div>
-
-</mat-card-content>
-</mat-card>
+        <div>
+          <span>邮箱：</span>
+          <span>{{ userInfo.email }}</span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="warn" (click)="destroy()">
+          销毁账户
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="hasRegisterStateControlPermission">
+    <mat-card-header><mat-card-title>开放注册</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <div>
+        <span>目前状态：</span>
+        <span>{{ isOpenRegister ? "开放" : "关闭" }}</span>
+      </div>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="setRegisterState(!isOpenRegister)"
+        >
+          {{ isOpenRegister ? "禁止注册" : "开放注册" }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

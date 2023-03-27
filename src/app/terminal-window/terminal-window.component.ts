@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Inject, InjectionToken, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  InjectionToken,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IDisposable, IEvent, Terminal } from 'xterm';
 import { Subscription } from 'rxjs';
 import { SocketService } from '../socket/socket.service';
@@ -9,11 +18,16 @@ export const SSH_PASSWORD = new InjectionToken<{}>('SSH_PASSWORD');
 @Component({
   selector: 'app-terminal-window',
   templateUrl: './terminal-window.component.html',
-  styleUrls: ['./terminal-window.component.scss']
+  styleUrls: ['./terminal-window.component.scss'],
 })
-export class TerminalWindowComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  constructor(@Inject(CLOSE_EVENT) public closeEvent: any, @Inject(SSH_PASSWORD) public password: string, private socketService: SocketService) { }
+export class TerminalWindowComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  constructor(
+    @Inject(CLOSE_EVENT) public closeEvent: any,
+    @Inject(SSH_PASSWORD) public password: string,
+    private socketService: SocketService
+  ) {}
   @ViewChild('term', { static: true }) terminalDiv?: ElementRef;
   term?: Terminal;
   ngOnInit(): void {
@@ -52,5 +66,4 @@ export class TerminalWindowComponent implements OnInit, AfterViewInit, OnDestroy
     this.socketService.socket.disconnect();
     this.closeEvent();
   }
-
 }

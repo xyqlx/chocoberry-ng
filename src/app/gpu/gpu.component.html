@@ -1,61 +1,76 @@
 <div class="gpu-container">
-    <div class="gpu-card-container" *ngIf="gpus.length === 0">
-        <mat-card class="gpu-card">
-            <mat-card-header><mat-card-title>显卡</mat-card-title></mat-card-header>
-<mat-card-content>
-            <div class="gpu-card-loading-spinner">
-                <mat-spinner [diameter]="50"></mat-spinner>
-            </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="gpu-card-container" *ngFor="let gpu of gpus; let i = index">
-        <mat-card class="gpu-card">
-            <mat-card-header><mat-card-title>{{gpu.name}}</mat-card-title></mat-card-header>
-            <mat-card-content>
-            <div class="gpu-card-progress">
-                <span>显存
-                    <strong>{{gpu.memUsed/1024 | number: '1.2-2'}}G</strong>
-                </span>
-                <!-- <mat-progress-bar mode="determinate" [value]="gpu.memUsed/gpu.memTotal*100"></mat-progress-bar> -->
-                <app-multi-progress [progresses]="[{'color': 'red', 'value': 12}, {'color': 'green', 'value': 40}]"></app-multi-progress>
-            </div>
-            <div class="gpu-card-progress">
-                <span>占用
-                    <strong>{{gpu.utilization | number: '2.1-1'}}%</strong>
-                </span>
-                <mat-progress-bar mode="determinate" [value]="gpu.utilization"></mat-progress-bar>
-            </div>
-            <div class="gpu-process-container">
-                <mat-accordion *ngFor="let process of gpu.processes">
-                    <mat-expansion-panel hideToggle>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <span>{{ process ? process.user : '-' }}</span>
-                                <span>🕑</span>
-                                <span>{{ (process && process.starttime) ? getDurationFromNow(process.starttime) : '' }}</span>
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                {{ process ? process.name : '' }}
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div class="gpu-process-detail" *ngIf="process">
-                            <div>pid={{process.pid}}</div>
-                            <div>parent={{process.ppid}}</div>
-                            <div>uid={{process.uid}}</div>
-                            <div>bin={{process.bin}}</div>
-                            <div>cmd={{process.cmd}}</div>
-                            <div *ngIf="process.starttime">lstart={{getReadableTime(process.starttime)}}</div>
-                            <div *ngIf="process.cwd">cwd={{process.cwd}}</div>
-                        </div>
-                        <div *ngIf="!process">
-                            无进程信息
-                        </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </div>
-
-</mat-card-content>
-</mat-card>
-    </div>
+  <div class="gpu-card-container" *ngIf="gpus.length === 0">
+    <mat-card class="gpu-card">
+      <mat-card-header><mat-card-title>显卡</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <div class="gpu-card-loading-spinner">
+          <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="gpu-card-container" *ngFor="let gpu of gpus; let i = index">
+    <mat-card class="gpu-card">
+      <mat-card-header
+        ><mat-card-title>{{ gpu.name }}</mat-card-title></mat-card-header
+      >
+      <mat-card-content>
+        <div class="gpu-card-progress">
+          <span
+            >显存
+            <strong>{{ gpu.memUsed / 1024 | number : "1.2-2" }}G</strong>
+          </span>
+          <!-- <mat-progress-bar mode="determinate" [value]="gpu.memUsed/gpu.memTotal*100"></mat-progress-bar> -->
+          <app-multi-progress
+            [progresses]="[
+              { color: 'red', value: 12 },
+              { color: 'green', value: 40 }
+            ]"
+          ></app-multi-progress>
+        </div>
+        <div class="gpu-card-progress">
+          <span
+            >占用
+            <strong>{{ gpu.utilization | number : "2.1-1" }}%</strong>
+          </span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="gpu.utilization"
+          ></mat-progress-bar>
+        </div>
+        <div class="gpu-process-container">
+          <mat-accordion *ngFor="let process of gpu.processes">
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span>{{ process ? process.user : "-" }}</span>
+                  <span>🕑</span>
+                  <span>{{
+                    process && process.starttime
+                      ? getDurationFromNow(process.starttime)
+                      : ""
+                  }}</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{ process ? process.name : "" }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="gpu-process-detail" *ngIf="process">
+                <div>pid={{ process.pid }}</div>
+                <div>parent={{ process.ppid }}</div>
+                <div>uid={{ process.uid }}</div>
+                <div>bin={{ process.bin }}</div>
+                <div>cmd={{ process.cmd }}</div>
+                <div *ngIf="process.starttime">
+                  lstart={{ getReadableTime(process.starttime) }}
+                </div>
+                <div *ngIf="process.cwd">cwd={{ process.cwd }}</div>
+              </div>
+              <div *ngIf="!process">无进程信息</div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

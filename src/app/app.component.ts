@@ -5,14 +5,11 @@ import { LoginService } from './login/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'chocoberry-ng';
-  constructor(
-    private authService: AuthService,
-    private login: LoginService
-  ) { }
+  constructor(private authService: AuthService, private login: LoginService) {}
   logout() {
     this.authService.logout();
     // refresh

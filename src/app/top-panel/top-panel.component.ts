@@ -5,7 +5,7 @@ import { ChocoService } from '../choco/choco.service';
 @Component({
   selector: 'app-top-panel',
   templateUrl: './top-panel.component.html',
-  styleUrls: ['./top-panel.component.scss']
+  styleUrls: ['./top-panel.component.scss'],
 })
 export class TopPanelComponent implements OnInit, OnDestroy {
   topSubscription: Subscription;
@@ -34,7 +34,7 @@ export class TopPanelComponent implements OnInit, OnDestroy {
   }
 
   async queryTop() {
-    const topInfo = await this.choco.getAsync(`process/top`) as any[];
+    const topInfo = (await this.choco.getAsync(`process/top`)) as any[];
     this.topInfo = topInfo.slice(0, 5);
     // query process for each topInfo
     for (const info of this.topInfo) {
@@ -43,7 +43,7 @@ export class TopPanelComponent implements OnInit, OnDestroy {
         try {
           const process = await this.choco.findProcess(pid);
           info.process = process as any;
-        } catch { }
+        } catch {}
       }
       // console.log(info.process)
     }
@@ -55,8 +55,7 @@ export class TopPanelComponent implements OnInit, OnDestroy {
     this.memInfo = await this.choco.getAsync(`memory`);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   ngOnDestroy() {
     this.topSubscription.unsubscribe();
   }

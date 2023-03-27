@@ -8,9 +8,8 @@ describe('SshTerminalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SshTerminalComponent ]
-    })
-    .compileComponents();
+      declarations: [SshTerminalComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

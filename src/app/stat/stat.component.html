@@ -1,10 +1,18 @@
 <div class="main">
-    <mat-button-toggle-group name="days" aria-label="stat days" (change)="timeChange($event)">
-        <mat-button-toggle value="1" [checked]="true">24 hours</mat-button-toggle>
-        <mat-button-toggle value="7">7 days</mat-button-toggle>
-    </mat-button-toggle-group>
-    <div class="tools">
-        <app-cpu-mem-chart [data]="data"></app-cpu-mem-chart>
-        <app-gpu-chart *ngFor="let item of [].constructor(this.gpuCount); let i = index" [data]="data" [gpuIndex]="i"></app-gpu-chart>
-    </div>
+  <mat-button-toggle-group
+    name="days"
+    aria-label="stat days"
+    (change)="timeChange($event)"
+  >
+    <mat-button-toggle value="1" [checked]="true">24 hours</mat-button-toggle>
+    <mat-button-toggle value="7">7 days</mat-button-toggle>
+  </mat-button-toggle-group>
+  <div class="tools">
+    <app-cpu-mem-chart [data]="data"></app-cpu-mem-chart>
+    <app-gpu-chart
+      *ngFor="let item of [].constructor(this.gpuCount); let i = index"
+      [data]="data"
+      [gpuIndex]="i"
+    ></app-gpu-chart>
+  </div>
 </div>

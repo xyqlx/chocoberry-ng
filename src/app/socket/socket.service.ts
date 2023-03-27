@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { io, Socket } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketService {
   public socket: Socket;
@@ -11,8 +11,8 @@ export class SocketService {
     this.socket = io(environment.apiUrl, {
       autoConnect: false,
       auth: {
-        token: localStorage.getItem('access_token')
-      }
+        token: localStorage.getItem('access_token'),
+      },
     });
   }
 }

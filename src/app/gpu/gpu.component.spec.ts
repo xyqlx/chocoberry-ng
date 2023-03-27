@@ -8,9 +8,8 @@ describe('GpuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GpuComponent ]
-    })
-    .compileComponents();
+      declarations: [GpuComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

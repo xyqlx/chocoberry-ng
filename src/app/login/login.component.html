@@ -1,46 +1,109 @@
 <div class="overlay-pane">
-    <div *ngIf="mode === 'login'" [formGroup]="form">
-        <mat-form-field appearance="fill">
-            <mat-label>用户名</mat-label>
-            <input formControlName="username" id="username" name="username" autocomplete="username" matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>密码</mat-label>
-            <input formControlName="password" id="password" name="password" autocomplete="password" matInput [type]="hide ? 'password' : 'text'" (keydown.enter)="login()">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <div class="error-info">{{errorInfo}}</div>
-        <div class="button-container">
-            <button mat-raised-button color="primary" (click)="login()">登录</button>
-            <button mat-stroked-button color="primary" *ngIf="isOpenRegister" (click)="mode = 'register'">切换到注册</button>
-        </div>
+  <div *ngIf="mode === 'login'" [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>用户名</mat-label>
+      <input
+        formControlName="username"
+        id="username"
+        name="username"
+        autocomplete="username"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>密码</mat-label>
+      <input
+        formControlName="password"
+        id="password"
+        name="password"
+        autocomplete="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        (keydown.enter)="login()"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="error-info">{{ errorInfo }}</div>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="login()">登录</button>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="isOpenRegister"
+        (click)="mode = 'register'"
+      >
+        切换到注册
+      </button>
     </div>
-    <div *ngIf="mode === 'register'" [formGroup]="registerForm">
-        <mat-form-field appearance="fill">
-            <mat-label>用户名</mat-label>
-            <input formControlName="username" id="registerUsername" name="registerUsername" autocomplete="registerUsername" matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>密码</mat-label>
-            <input formControlName="password" id="registerPassword" name="registerPassword" autocomplete="registerPassword" matInput [type]="hide ? 'password' : 'text'" (keydown.enter)="login()">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>linux用户名</mat-label>
-            <input formControlName="linuxUser" id="linuxUser" name="linuxUser" autocomplete="linuxUser" matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>邮箱</mat-label>
-            <input formControlName="email" id="email" name="email" autocomplete="email" matInput>
-        </mat-form-field>
-        <div class="error-info">{{errorInfo}}</div>
-        <div class="button-container">
-            <button mat-raised-button color="primary" (click)="register()">注册</button>
-            <button mat-stroked-button color="primary" (click)="mode = 'login'">切换到登录</button>
-        </div>
+  </div>
+  <div *ngIf="mode === 'register'" [formGroup]="registerForm">
+    <mat-form-field appearance="fill">
+      <mat-label>用户名</mat-label>
+      <input
+        formControlName="username"
+        id="registerUsername"
+        name="registerUsername"
+        autocomplete="registerUsername"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>密码</mat-label>
+      <input
+        formControlName="password"
+        id="registerPassword"
+        name="registerPassword"
+        autocomplete="registerPassword"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        (keydown.enter)="login()"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>linux用户名</mat-label>
+      <input
+        formControlName="linuxUser"
+        id="linuxUser"
+        name="linuxUser"
+        autocomplete="linuxUser"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>邮箱</mat-label>
+      <input
+        formControlName="email"
+        id="email"
+        name="email"
+        autocomplete="email"
+        matInput
+      />
+    </mat-form-field>
+    <div class="error-info">{{ errorInfo }}</div>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="register()">
+        注册
+      </button>
+      <button mat-stroked-button color="primary" (click)="mode = 'login'">
+        切换到登录
+      </button>
     </div>
+  </div>
 </div>

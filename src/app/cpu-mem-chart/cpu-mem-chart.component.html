@@ -1,7 +1,12 @@
 <mat-card>
-    <mat-card-header><mat-card-title>性能统计</mat-card-title></mat-card-header>
-<mat-card-content>
-    <div *ngIf="chartOption" echarts [options]="chartOption" (chartInit)="onChartInit($event)" class="demo-chart"></div>
-
-</mat-card-content>
+  <mat-card-header><mat-card-title>性能统计</mat-card-title></mat-card-header>
+  <mat-card-content>
+    <div
+      *ngIf="chartOption"
+      echarts
+      [options]="chartOption"
+      (chartInit)="onChartInit($event)"
+      class="demo-chart"
+    ></div>
+  </mat-card-content>
 </mat-card>

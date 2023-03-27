@@ -9,13 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './../environments/environment';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -43,7 +43,6 @@ import { AddTriggerComponent } from './notify/add-trigger/add-trigger.component'
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MultiProgressComponent } from './multi-progress/multi-progress.component';
-
 
 @NgModule({
   declarations: [
@@ -79,8 +78,9 @@ import { MultiProgressComponent } from './multi-progress/multi-progress.componen
         allowedDomains: [environment.apiDomain],
         disallowedRoutes: [
           environment.apiDomain + '/auth/login',
-          environment.apiDomain + '/auth/register'],
-      }
+          environment.apiDomain + '/auth/register',
+        ],
+      },
     }),
     OverlayModule,
     MatFormFieldModule,
@@ -106,9 +106,9 @@ import { MultiProgressComponent } from './multi-progress/multi-progress.componen
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

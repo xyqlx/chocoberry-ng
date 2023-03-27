@@ -1,7 +1,14 @@
 <mat-card>
-    <mat-card-header><mat-card-title>GPU{{_gpuIndex}}统计</mat-card-title></mat-card-header>
-<mat-card-content>
-    <div *ngIf="!gpuUndefined && chartOption" echarts [options]="chartOption" (chartInit)="onChartInit($event)" class="demo-chart"></div>
-
-</mat-card-content>
+  <mat-card-header
+    ><mat-card-title>GPU{{ _gpuIndex }}统计</mat-card-title></mat-card-header
+  >
+  <mat-card-content>
+    <div
+      *ngIf="!gpuUndefined && chartOption"
+      echarts
+      [options]="chartOption"
+      (chartInit)="onChartInit($event)"
+      class="demo-chart"
+    ></div>
+  </mat-card-content>
 </mat-card>

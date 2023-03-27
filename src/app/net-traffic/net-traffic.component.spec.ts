@@ -8,9 +8,8 @@ describe('NetTrafficComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NetTrafficComponent ]
-    })
-    .compileComponents();
+      declarations: [NetTrafficComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

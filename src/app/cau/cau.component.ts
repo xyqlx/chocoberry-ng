@@ -5,25 +5,27 @@ import { ChocoService } from '../choco/choco.service';
 @Component({
   selector: 'app-cau',
   templateUrl: './cau.component.html',
-  styleUrls: ['./cau.component.scss']
+  styleUrls: ['./cau.component.scss'],
 })
 export class CauComponent implements OnInit {
-
-  constructor(private choco: ChocoService) { }
+  constructor(private choco: ChocoService) {}
 
   username = '';
   hide = true;
   form: UntypedFormGroup = new UntypedFormGroup({
-    'username': new UntypedFormControl(''),
-    'password': new UntypedFormControl('')
+    username: new UntypedFormControl(''),
+    password: new UntypedFormControl(''),
   });
 
   async ngOnInit(): Promise<void> {
     await this.updateStatus();
   }
 
-  async updateStatus(){
-    const status = await this.choco.getAsync('cau') as {status: string, username?: string};
+  async updateStatus() {
+    const status = (await this.choco.getAsync('cau')) as {
+      status: string;
+      username?: string;
+    };
     if (status.status === 'login') {
       this.username = status.username!;
     }

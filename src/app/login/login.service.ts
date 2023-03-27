@@ -4,15 +4,15 @@ import { Injectable, Injector } from '@angular/core';
 import { LoginComponent, LOGIN_EVENT } from './login.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
-  constructor(private overlay: Overlay, private injector: Injector) { }
+  constructor(private overlay: Overlay, private injector: Injector) {}
 
   showLogin() {
     const config = new OverlayConfig();
-    config.positionStrategy = this.overlay.position()
+    config.positionStrategy = this.overlay
+      .position()
       .global() // 全局显示
       .centerHorizontally() // 水平居中
       .centerVertically(); // 垂直居中
@@ -22,11 +22,14 @@ export class LoginService {
     const injector = Injector.create({
       parent: this.injector,
       providers: [
-        { provide: LOGIN_EVENT, useValue: () => {
-          overlayRef.dispose(); // 销毁overlay层
-        } }
-      ]
-    })
+        {
+          provide: LOGIN_EVENT,
+          useValue: () => {
+            overlayRef.dispose(); // 销毁overlay层
+          },
+        },
+      ],
+    });
     const componentPortal = new ComponentPortal(LoginComponent, null, injector);
     overlayRef.attach(componentPortal);
   }

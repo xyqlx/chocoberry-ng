@@ -5,19 +5,24 @@ import { Trigger, triggerTypes, notifyTypes } from '../trigger';
 @Component({
   selector: 'app-add-trigger',
   templateUrl: './add-trigger.component.html',
-  styleUrls: ['./add-trigger.component.scss']
+  styleUrls: ['./add-trigger.component.scss'],
 })
 export class AddTriggerComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  trigger: Trigger = new Trigger('time', 1, { time: new Date().getTime() }, 'email', new Date().getTime());
+  trigger: Trigger = new Trigger(
+    'time',
+    1,
+    { time: new Date().getTime() },
+    'email',
+    new Date().getTime()
+  );
   triggerTypes = triggerTypes;
   notifyTypes = notifyTypes;
-  @Output() addTriggerEvent: EventEmitter<Trigger> = new EventEmitter<Trigger>();
+  @Output() addTriggerEvent: EventEmitter<Trigger> =
+    new EventEmitter<Trigger>();
 
   addTrigger() {
     this.addTriggerEvent.emit(this.trigger);

@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'netTraffic'
+  name: 'netTraffic',
 })
 export class NetTrafficPipe implements PipeTransform {
-
   transform(value: string): string {
     const num = Number(value);
     if (num < 1) {
@@ -19,5 +18,4 @@ export class NetTrafficPipe implements PipeTransform {
       return `${(num / 1024 / 1024).toFixed(0)} GB/s`;
     }
   }
-
 }

@@ -1,29 +1,44 @@
 <mat-card>
-    <mat-card-header><mat-card-title>添加通知</mat-card-title></mat-card-header>
-<mat-card-content>
+  <mat-card-header><mat-card-title>添加通知</mat-card-title></mat-card-header>
+  <mat-card-content>
     <div class="add-trigger-ui">
-        <mat-form-field>
-            <mat-label>通知类型</mat-label>
-            <mat-select [(value)]="trigger.type">
-                <mat-option *ngFor="let type of triggerTypes" [value]="type">{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>生效次数</mat-label>
-            <input type="number" matInput placeholder="生效次数" [(ngModel)]="trigger.repeat">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>通知方式</mat-label>
-            <mat-select [(ngModel)]="trigger.notifyType">
-                <mat-option *ngFor="let method of notifyTypes" [value]="method">{{method}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>通知时间</mat-label>
-            <input type="number" matInput placeholder="通知时间" [(ngModel)]="trigger.payload.time">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="addTrigger()">添加</button>
+      <mat-form-field>
+        <mat-label>通知类型</mat-label>
+        <mat-select [(value)]="trigger.type">
+          <mat-option *ngFor="let type of triggerTypes" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>生效次数</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="生效次数"
+          [(ngModel)]="trigger.repeat"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>通知方式</mat-label>
+        <mat-select [(ngModel)]="trigger.notifyType">
+          <mat-option *ngFor="let method of notifyTypes" [value]="method">{{
+            method
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>通知时间</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="通知时间"
+          [(ngModel)]="trigger.payload.time"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="addTrigger()">
+        添加
+      </button>
     </div>
-
-</mat-card-content>
+  </mat-card-content>
 </mat-card>

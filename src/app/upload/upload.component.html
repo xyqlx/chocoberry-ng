@@ -1,11 +1,22 @@
 <mat-card class="upload-card">
-    <mat-card-header><mat-card-title>文件上传</mat-card-title></mat-card-header>
-<mat-card-content>
+  <mat-card-header><mat-card-title>文件上传</mat-card-title></mat-card-header>
+  <mat-card-content>
     <span class="progress">{{ progress }}%</span>
     <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
-    <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" />
-    <button mat-flat-button color="primary" [disabled]="!currentFile" (click)="upload()">上传至{{uploadPath}}</button>
+    <input
+      type="file"
+      id="fileInput"
+      (change)="selectFile($event)"
+      name="fileInput"
+    />
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!currentFile"
+      (click)="upload()"
+    >
+      上传至{{ uploadPath }}
+    </button>
     <div *ngIf="message" class="message">{{ message }}</div>
-
-</mat-card-content>
+  </mat-card-content>
 </mat-card>

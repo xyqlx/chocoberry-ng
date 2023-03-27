@@ -5,10 +5,9 @@ import { ChocoService } from '../choco/choco.service';
 @Component({
   selector: 'app-net-traffic',
   templateUrl: './net-traffic.component.html',
-  styleUrls: ['./net-traffic.component.scss']
+  styleUrls: ['./net-traffic.component.scss'],
 })
 export class NetTrafficComponent implements OnInit, OnDestroy {
-
   trafficSubscription: Subscription;
 
   trafficInfo: any[] = [];
@@ -31,7 +30,7 @@ export class NetTrafficComponent implements OnInit, OnDestroy {
   }
 
   async queryTraffic() {
-    const trafficInfo = await this.choco.getAsync(`net-traffic`) as any[];
+    const trafficInfo = (await this.choco.getAsync(`net-traffic`)) as any[];
     this.trafficInfo = trafficInfo.slice(0, 5);
     // query process for each topInfo
     for (const info of this.trafficInfo) {
@@ -39,8 +38,7 @@ export class NetTrafficComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   ngOnDestroy() {
     this.trafficSubscription.unsubscribe();
   }

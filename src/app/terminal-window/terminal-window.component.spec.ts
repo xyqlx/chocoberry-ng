@@ -8,9 +8,8 @@ describe('TerminalWindowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TerminalWindowComponent ]
-    })
-    .compileComponents();
+      declarations: [TerminalWindowComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
