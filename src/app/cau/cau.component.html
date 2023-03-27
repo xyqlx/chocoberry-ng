@@ -1,22 +1,28 @@
 <mat-card>
-    <mat-card-title>CAU网关</mat-card-title>
-    <div>
-        <span>登录账户：</span>
-        <span>{{ username ? username : '无' }}</span>
-        <button mat-button color="primary" *ngIf="username" (click)="logout()">注销</button>
-    </div>
-    <div *ngIf="!username" class="login-panel" [formGroup]="form">
-        <mat-form-field appearance="fill">
-            <mat-label>用户名</mat-label>
-            <input formControlName="username" id="cau_username" name="cau_username" autocomplete="cau_username" matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>密码</mat-label>
-            <input formControlName="password" id="cau_password" name="cau_password" autocomplete="cau_password" matInput [type]="hide ? 'password' : 'text'" (keydown.enter)="login()">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <button mat-button color="primary" (click)="login()">登录</button>
-    </div>
+    <mat-card-header><mat-card-title>CAU网关</mat-card-title></mat-card-header>
+    <mat-card-content>
+        <div>
+            <span>登录账户：</span>
+            <span>{{ username ? username : '无' }}</span>
+            <button mat-button color="primary" *ngIf="username" (click)="logout()">注销</button>
+        </div>
+        <div *ngIf="!username" class="login-panel" [formGroup]="form">
+            <mat-form-field appearance="fill">
+                <mat-label>用户名</mat-label>
+                <input formControlName="username" id="cau_username" name="cau_username" autocomplete="cau_username"
+                    matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>密码</mat-label>
+                <input formControlName="password" id="cau_password" name="cau_password" autocomplete="cau_password"
+                    matInput [type]="hide ? 'password' : 'text'" (keydown.enter)="login()">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-button color="primary" (click)="login()">登录</button>
+        </div>
+
+    </mat-card-content>
 </mat-card>

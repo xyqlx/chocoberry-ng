@@ -1,5 +1,6 @@
 <mat-card>
-    <mat-card-title>E-mail</mat-card-title>
+    <mat-card-header><mat-card-title>E-mail</mat-card-title></mat-card-header>
+<mat-card-content>
     <div [formGroup]="form">
         <mat-form-field appearance="fill">
             <mat-label>内容</mat-label>
@@ -8,4 +9,6 @@
         </mat-form-field>
     </div>
     <button mat-raised-button color="primary" (click)="send()">发送</button>
+
+</mat-card-content>
 </mat-card>

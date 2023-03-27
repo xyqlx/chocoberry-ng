@@ -1,5 +1,6 @@
 <mat-card>
-    <mat-card-title>SSH</mat-card-title>
+    <mat-card-header><mat-card-title>SSH</mat-card-title></mat-card-header>
+<mat-card-content>
     <div [formGroup]="form">
         <mat-form-field appearance="fill">
             <mat-label>SSH密码</mat-label>
@@ -11,4 +12,6 @@
         </mat-form-field>
     </div>
     <button mat-raised-button color="primary" (click)="connect()">登录</button>
+
+</mat-card-content>
 </mat-card>

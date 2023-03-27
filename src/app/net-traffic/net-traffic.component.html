@@ -1,5 +1,6 @@
 <mat-card class="panel-card">
-    <mat-card-title>网络{{this.shouldUpdate ? '' : '（暂停中）'}}</mat-card-title>
+    <mat-card-header><mat-card-title>网络{{this.shouldUpdate ? '' : '（暂停中）'}}</mat-card-title></mat-card-header>
+<mat-card-content>
     <div class="card-inner">
         <table mat-table [dataSource]="trafficInfo" (mouseenter)="stopUpdate()" (mouseleave)="continueUpdate()" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
@@ -27,4 +28,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
+
+</mat-card-content>
 </mat-card>
