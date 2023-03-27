@@ -1,6 +1,7 @@
 <div class="main">
     <mat-card>
-        <mat-card-title>账户信息</mat-card-title>
+        <mat-card-header><mat-card-title>账户信息</mat-card-title></mat-card-header>
+<mat-card-content>
         <div *ngIf="!userInfo">
             <mat-spinner [diameter]="50"></mat-spinner>
         </div>
@@ -21,9 +22,11 @@
         <div class="button-container">
             <button mat-raised-button color="warn" (click)="destroy()">销毁账户</button>
         </div>
+    </mat-card-content>
     </mat-card>
     <mat-card *ngIf="hasRegisterStateControlPermission">
-        <mat-card-title>开放注册</mat-card-title>
+        <mat-card-header><mat-card-title>开放注册</mat-card-title></mat-card-header>
+    <mat-card-content>
         <div>
             <span>目前状态：</span>
             <span>{{ isOpenRegister ? '开放' : '关闭' }}</span>
@@ -31,5 +34,7 @@
         <div class="button-container">
             <button mat-raised-button color="primary" (click)="setRegisterState(!isOpenRegister)">{{ isOpenRegister ? '禁止注册' : '开放注册' }}</button>
         </div>
-    </mat-card>
+
+</mat-card-content>
+</mat-card>
 </div>
