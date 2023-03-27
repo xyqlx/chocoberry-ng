@@ -1,7 +1,7 @@
 <div class="navigator-bar">
   <div class="site-logo">
     <img alt="logo" src="../assets/chocolate-berry.png" />
-    <span>Chocoberry</span>
+    <span>chocoberry</span>
   </div>
   <div class="router">
     <button mat-button [routerLink]="['home']">温暖的家</button>
@@ -10,7 +10,7 @@
     <button mat-button [routerLink]="['user']">用户设置</button>
   </div>
   <div class="end-part">
-    <button mat-icon-button aria-label="settings" (click)="openSettingsDialog()">
+    <button mat-icon-button aria-label="settings" (click)="openSettingsDialog">
       <mat-icon>settings</mat-icon>
     </button>
     <button mat-stroked-button color="primary" (click)="logout()">登出</button>
