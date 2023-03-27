@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { LoginService } from './login/login.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { SettingsComponent } from './settings/settings.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,11 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'chocoberry-ng';
-  constructor(private authService: AuthService, private login: LoginService) {}
+  constructor(
+    private authService: AuthService,
+    private login: LoginService,
+    public dialog: Dialog
+  ) {}
   logout() {
     this.authService.logout();
     // refresh
@@ -24,5 +30,12 @@ export class AppComponent {
     if (!this.loggedin) {
       this.login.showLogin();
     }
+  }
+
+  openSettingsDialog(){
+    this.dialog.open(SettingsComponent, {
+      width: '500px',
+      height: '500px',
+    });
   }
 }

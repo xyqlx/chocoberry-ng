@@ -10,6 +10,9 @@
     <button mat-button [routerLink]="['user']">用户设置</button>
   </div>
   <div class="end-part">
+    <button mat-icon-button aria-label="settings" (click)="openSettingsDialog()">
+      <mat-icon>settings</mat-icon>
+    </button>
     <button mat-stroked-button color="primary" (click)="logout()">登出</button>
   </div>
 </div>

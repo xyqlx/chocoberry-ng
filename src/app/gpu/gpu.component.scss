@@ -1,3 +1,11 @@
+.circle {
+    // 一个字大小的圆
+    width: 1em;
+    height: 1em;
+    border-radius: 40%;
+    background-color: gray;
+    margin-right: 0.5em;
+}
 .cuda-version {
     width: 100%;
     text-align: center;

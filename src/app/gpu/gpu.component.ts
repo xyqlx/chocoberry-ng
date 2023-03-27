@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChocoService } from '../choco/choco.service';
 import { interval, Subscription } from 'rxjs';
+import { ColorGenerator } from '../color-generator/ColorGenerator';
+import { ProcessColorService } from '../color-generator/process-color.service';
 
 declare type GPUInfo = {
   name: string;
@@ -27,7 +29,10 @@ declare type GPUInfo = {
   styleUrls: ['./gpu.component.scss'],
 })
 export class GpuComponent implements OnInit, OnDestroy {
-  constructor(private choco: ChocoService) {
+  constructor(
+      private choco: ChocoService,
+      private processColorService: ProcessColorService
+    ) {
     const source = interval(2000);
     this.gpuSubscription = source.subscribe(async () => await this.queryGPU());
   }
@@ -35,7 +40,7 @@ export class GpuComponent implements OnInit, OnDestroy {
   gpus: GPUInfo[] = [];
   cudaVersion = '';
 
-  ngOnInit() {}
+  ngOnInit() { }
   ngOnDestroy() {
     this.gpuSubscription.unsubscribe();
   }
@@ -64,7 +69,7 @@ export class GpuComponent implements OnInit, OnDestroy {
               (process as any).usedmemory =
                 this.getNumber(p['used_memory']) ?? 0;
               gpuInfo.processes.push(process as any);
-            } catch {}
+            } catch { }
           }
         } else {
           const pid = Number(processes['process_info']['pid']);
@@ -74,7 +79,7 @@ export class GpuComponent implements OnInit, OnDestroy {
               (process as any).usedmemory =
                 this.getNumber(processes['process_info']['used_memory']) ?? 0;
               gpuInfo.processes.push(process as any);
-            } catch {}
+            } catch { }
           }
         }
       }
@@ -101,6 +106,48 @@ export class GpuComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+  getProcessColor(pid: number) {
+    return this.processColorService.colorGenerator.get(pid);
+  }
+  get memoryUsagePerProcess(): { color: string, value: number }[][] {
+    const memInfo: { total: number, used: number, processes: { pid: number, used: number }[] }[] = this.gpus.map(
+      (gpu) => ({
+        total: gpu.memTotal,
+        used: gpu.memUsed,
+        processes: gpu.processes.map((p: any) => ({
+          pid: p.pid,
+          used: p.usedmemory,
+        })),
+      })
+    );
+    let result: { color: string, value: number }[][] = [];
+    // 统计进程列表
+    const pidList: Set<number> = new Set();
+    for (const gpu of memInfo) {
+      for (const p of gpu.processes) {
+        pidList.add(p.pid);
+      }
+    }
+    // 自动清理过期进程颜色
+    this.processColorService.colorGenerator.autoClear(pidList);
+    // 为每个进程分配随机颜色
+    const pidColorMap: Map<number, string> = new Map();
+    for (const pid of pidList) {
+      pidColorMap.set(pid, this.processColorService.colorGenerator.get(pid));
+    }
+    // 将进程映射为颜色
+    for (const gpu of memInfo) {
+      const gpuResult: { color: string, value: number }[] = [];
+      for (const p of gpu.processes) {
+        gpuResult.push({
+          color: pidColorMap.get(p.pid) ?? '#000',
+          value: p.used / gpu.total,
+        });
+      }
+      result.push(gpuResult);
+    }
+    return result;
   }
   getNumber(text: string) {
     const reg = /\d+/g;

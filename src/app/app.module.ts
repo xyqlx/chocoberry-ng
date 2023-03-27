@@ -43,6 +43,9 @@ import { AddTriggerComponent } from './notify/add-trigger/add-trigger.component'
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MultiProgressComponent } from './multi-progress/multi-progress.component';
+import { SettingsComponent } from './settings/settings.component';
+import { DialogModule } from '@angular/cdk/dialog';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,7 @@ import { MultiProgressComponent } from './multi-progress/multi-progress.componen
     TriggerComponent,
     AddTriggerComponent,
     MultiProgressComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +111,8 @@ import { MultiProgressComponent } from './multi-progress/multi-progress.componen
     MatProgressSpinnerModule,
     MatSelectModule,
     FormsModule,
+    DialogModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

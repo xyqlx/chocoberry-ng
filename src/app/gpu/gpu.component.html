@@ -22,10 +22,7 @@
           </span>
           <!-- <mat-progress-bar mode="determinate" [value]="gpu.memUsed/gpu.memTotal*100"></mat-progress-bar> -->
           <app-multi-progress
-            [progresses]="[
-              { color: 'red', value: 12 },
-              { color: 'green', value: 40 }
-            ]"
+            [progresses]="memoryUsagePerProcess[i]"
           ></app-multi-progress>
         </div>
         <div class="gpu-card-progress">
@@ -43,6 +40,8 @@
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
+                  <!-- 一个小方块 -->
+                  <span [ngStyle]="{'background-color': getProcessColor(process.pid) }" class="circle"></span>
                   <span>{{ process ? process.user : "-" }}</span>
                   <span>🕑</span>
                   <span>{{
