@@ -1,20 +1,25 @@
 <div>
-    <div class="slider-container">
-        <label class="label">饱和度</label>
+    <div *ngIf="router.url === '/home'" class="slider-container">
+        <label class="label">进程色彩饱和度</label>
         <mat-slider min="0" max="1" step="0.01">
             <input matSliderThumb [(ngModel)]="saturation">
         </mat-slider>
     </div>
 
-    <div class="slider-container">
-        <label class="label">亮度</label>
+    <div *ngIf="router.url === '/home'" class="slider-container">
+        <label class="label">进程色彩亮度</label>
         <mat-slider min="0" max="1" step="0.01">
             <input matSliderThumb [(ngModel)]="lightness">
         </mat-slider>
     </div>
+
+    <div *ngIf="router.url === '/home'" class="input-container">
+        <label class="label"><a href="https://echarts.apache.org/zh/option.html#series-treemap.leafDepth">leafDepth</a></label>
+        <input matInput type="number" [ngModel]="(topChartSettings$ | async)!.leafDepth" (ngModelChange)="setLeafDepth($event)">
+    </div>
     
     <div class="button-container">
-        <button mat-stroked-button color="primary" (click)="refreshColor()">重新生成进程颜色</button>
+        <button *ngIf="router.url === '/home'" mat-stroked-button color="primary" (click)="refreshColor()">重新生成进程颜色</button>
         <button mat-stroked-button color="default" (click)="close()">关闭</button>
     </div>
 </div>

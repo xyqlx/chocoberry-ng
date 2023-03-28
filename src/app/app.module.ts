@@ -47,6 +47,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { topChartSettingsReducer } from './state/top-chart-settings.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
+    StoreModule.forRoot({ topChartSettings: topChartSettingsReducer }),
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatSelectModule,

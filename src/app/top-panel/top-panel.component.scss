@@ -40,6 +40,11 @@
     text-align: right;
 }
 .chart{
-    width: min(calc(50vw - 100px), calc(100vh - 250px));
-    height: min(calc(50vw - 100px), calc(100vh - 250px));
+    width: min(calc(50vw - 100px), calc(100vh - 280px));
+    height: min(calc(50vw - 100px), calc(100vh - 280px));
+}
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

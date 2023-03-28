@@ -24,6 +24,10 @@
         </div>
       </div>
       <div class="chart-container">
+        <mat-button-toggle-group name="chartMode" [value]="chartMode" (change)="changeChartMode($event)" aria-label="chartMode">
+          <mat-button-toggle value="cpu">CPU</mat-button-toggle>
+          <mat-button-toggle value="memory">内存</mat-button-toggle>
+        </mat-button-toggle-group>
         <div
           *ngIf="chartOption"
           echarts

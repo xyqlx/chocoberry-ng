@@ -6,7 +6,7 @@
 }
 .label {
     display: inline-block;
-    width: 50px;
+    width: 100px;
 }
 .button-container {
     display: flex;
@@ -16,4 +16,7 @@
 }
 .button-container > button {
     margin-left: 10px;
+}
+.input-container {
+    margin-top: 10px;
 }

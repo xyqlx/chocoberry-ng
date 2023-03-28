@@ -7,7 +7,7 @@
     "build": "ng build --base-href /ui",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "pretty": "prettier --write \"./src/app/**/*.{ts,tsx,html,json}\"" 
+    "pretty": "prettier --write \"./src/app/**/*.{ts,tsx,html,json}\""
   },
   "private": true,
   "dependencies": {
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^15.2.4",
     "@angular/router": "^15.2.4",
     "@auth0/angular-jwt": "^5.0.2",
+    "@ngrx/store": "^15.4.0",
     "echarts": "^5.4.2",
     "ngx-echarts": "^15.0.2",
     "rxjs": "~7.5.0",
