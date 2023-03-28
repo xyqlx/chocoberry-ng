@@ -11,6 +11,28 @@ export class ColorGenerator {
         return this.hues.has(key);
     }
 
+    copyFrom(other: ColorGenerator) {
+        this.saturation = other.saturation;
+        this.lightness = other.lightness;
+        this.hues = new Map(other.hues);
+    }
+
+    // 按照0~1的范围，返回颜色，并且避免和现有的颜色重复
+    tempMapColor(num: number){
+        let hue = num % 1;
+        // 如果已经存在和这个颜色相近的颜色（只能避免第一次roll中）
+        if (this.hues.size > 0) {
+            const hueValues = Array.from(this.hues.values());
+            for (const hueValue of hueValues) {
+                if (Math.abs(hueValue - hue) < 0.01) {
+                    hue = (hue + 0.5) % 1;
+                    break;
+                }
+            }
+        }
+        return `hsl(${hue * 360}, ${this.saturation * 100}%, ${this.lightness * 100}%)`;
+    }
+
     get(key: number | string): string {
         let hue = 0;
         if (this.hues.has(key)) {

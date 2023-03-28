@@ -117,7 +117,6 @@ export class CpuMemChartComponent implements OnInit {
   chart?: ECharts;
   onChartInit(ec: ECharts) {
     this.chart = ec;
-    console.log(this.chart);
   }
 
   ngOnInit(): void {}

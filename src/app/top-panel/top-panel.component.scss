@@ -3,7 +3,7 @@
 }
 .card-inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
 }
 .performance-container {
@@ -38,4 +38,8 @@
 .mat-column-mem {
     padding-right: 10px;
     text-align: right;
+}
+.chart{
+    width: min(calc(50vw - 100px), calc(100vh - 250px));
+    height: min(calc(50vw - 100px), calc(100vh - 250px));
 }
