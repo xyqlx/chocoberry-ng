@@ -112,10 +112,13 @@ export class TopPanelComponent implements OnInit, OnDestroy {
         return num * 1024 * 1024;
       case 'g':
         return num * 1024 * 1024 * 1024;
+      case 't':
+        return num * 1024 * 1024 * 1024 * 1024;
       default:
         return num;
     }
   }
+  //TODO: 考虑到top完全可以获得ppid，其实这里不需要获取ps。然而这需要修改服务端
   async queryTop() {
     const topInfo = await this.choco.getAsync(`process/top`) as {
       'PID': string, 'USER': string, 'PR': string, 'NI': string, 'VIRT': string, 'RES': string, 'SHR': string, 'S': string, '%CPU': string, '%MEM': string, 'TIME+': string, 'COMMAND': string,
