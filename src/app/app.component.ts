@@ -10,7 +10,6 @@ import { SettingsComponent } from './settings/settings.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'chocoberry-ng';
   constructor(
     private authService: AuthService,
     private login: LoginService,

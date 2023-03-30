@@ -14,9 +14,10 @@
     height: 40px;
     padding: 5px;
 }
-.site-logo > span {
+.logo-text {
     font-size: 24px;
     font-weight: bold;
+    white-space: nowrap;
 }
 .router {
     display: flex;
@@ -39,4 +40,35 @@
 }
 .right-button > button {
     font-size: 16px;
+}
+
+/* 定义动画关键帧 */
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 应用动画 */
+.blinking-text {
+    $num-spans: 5; // 设置要闪烁的 span 元素数量
+    $delay: 0s; // 设置第一个 span 元素的动画延迟时间
+    $step: 1s; // 设置每个 span 元素之间的动画延迟时间间隔
+
+    @for $i from 1 through $num-spans {
+        span:nth-child(#{$i}) {
+            animation: blink 5s linear infinite ($delay + ($i - 1) * $step);
+        }
+    }
+}
+
+/* 添加样式 */
+.blinking-text > span {
+    display: inline-block;
 }
