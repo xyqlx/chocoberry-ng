@@ -16,6 +16,8 @@ type ProcessNode = {
   sum_cpu: number,
   sum_mem: number,
   children: ProcessNode[],
+  user: string,
+  command: string
 };
 
 @Component({
@@ -25,28 +27,6 @@ type ProcessNode = {
 })
 export class TopPanelComponent implements OnInit, OnDestroy {
   topSubscription: Subscription;
-  topInfo: {
-    'PID': number,
-    'USER': string,
-    'PR': number,
-    'NI': number,
-    'VIRT': number,
-    'RES': number,
-    'SHR': number,
-    'S': string,
-    '%CPU': number,
-    '%MEM': number,
-    'TIME+': string,
-    'COMMAND': string,
-  }[] = [];
-  psInfo: {
-    'PID': number,
-    'USER': string,
-    'PPID': number,
-    '%CPU': number,
-    '%MEM': number,
-    'CMD': string,
-  }[] = [];
   cpuInfo: any;
   memInfo: any;
   displayedColumns = ['command', 'user', 'cpu', 'mem'];
@@ -63,9 +43,7 @@ export class TopPanelComponent implements OnInit, OnDestroy {
       await this.queryCPU();
       await this.queryMem();
       if (this.shouldUpdate) {
-        await this.queryTop();
-        await this.queryPS();
-        this.renderTreeMap();
+        await this.renderTreeMap();
       }
     });
     this.topChartSettings$.subscribe((settings) => {
@@ -80,27 +58,6 @@ export class TopPanelComponent implements OnInit, OnDestroy {
   }
   stopUpdate() {
     this.shouldUpdate = false;
-  }
-
-  async queryPS() {
-    const psInfo = (await this.choco.getAsync(`process/ps`)) as {
-      'PID': string,
-      'USER': string,
-      'PPID': string,
-      '%CPU': string,
-      '%MEM': string,
-      'CMD': string,
-    }[];
-    this.psInfo = psInfo.map((item) => {
-      return {
-        'PID': parseInt(item.PID),
-        'USER': item.USER,
-        'PPID': parseInt(item.PPID),
-        '%CPU': parseFloat(item['%CPU']),
-        '%MEM': parseFloat(item['%MEM']),
-        'CMD': item.CMD,
-      };
-    });
   }
   toFloatWithUnit(value: string) {
     const unit = value.slice(-1);
@@ -118,28 +75,6 @@ export class TopPanelComponent implements OnInit, OnDestroy {
         return num;
     }
   }
-  //TODO: 考虑到top完全可以获得ppid，其实这里不需要获取ps。然而这需要修改服务端
-  async queryTop() {
-    const topInfo = await this.choco.getAsync(`process/top`) as {
-      'PID': string, 'USER': string, 'PR': string, 'NI': string, 'VIRT': string, 'RES': string, 'SHR': string, 'S': string, '%CPU': string, '%MEM': string, 'TIME+': string, 'COMMAND': string,
-    }[];
-    this.topInfo = topInfo.map((item) => {
-      return {
-        'PID': parseInt(item.PID),
-        'USER': item.USER,
-        'PR': parseInt(item.PR),
-        'NI': parseInt(item.NI),
-        'VIRT': this.toFloatWithUnit(item.VIRT),
-        'RES': this.toFloatWithUnit(item.RES),
-        'SHR': this.toFloatWithUnit(item.SHR),
-        'S': item.S,
-        '%CPU': parseFloat(item['%CPU']),
-        '%MEM': parseFloat(item['%MEM']),
-        'TIME+': item['TIME+'],
-        'COMMAND': item.COMMAND,
-      };
-    });
-  }
   async queryCPU() {
     this.cpuInfo = await this.choco.getAsync(`cpu`);
   }
@@ -156,43 +91,26 @@ export class TopPanelComponent implements OnInit, OnDestroy {
     this.chart = ec;
   }
   chartMode = 'cpu';
-  changeChartMode($event: MatButtonToggleChange){
+  changeChartMode($event: MatButtonToggleChange) {
     this.chartMode = $event.value;
     this.renderTreeMap();
   }
-  psInfoMap = new Map<number, {
-    'PID': number, 'USER': string, 'PPID': number, '%CPU': number, '%MEM': number, 'CMD': string,
-  }>();
   psInfoMapReverse = new Map<number, number[]>();
   processTree: ProcessNode = {
-    pid: -1, ppid: -1, cpu: 0, mem: 0, sum_cpu: 0, sum_mem: 0, children: [],
+    pid: -1, ppid: -1, cpu: 0, mem: 0, sum_cpu: 0, sum_mem: 0, children: [], user: '', command: ''
   };
-  renderTreeMap(){
-    // 将psInfo转换为Map，方便查找
-    this.psInfoMap.clear();
-    this.psInfo.forEach((item) => {
-      this.psInfoMap.set(item.PID, item);
-    });
-    // 构造一个反向的Map，方便查找子进程
-    this.psInfoMapReverse.clear();
-    for (let [key, value] of this.psInfoMap) {
-      if (this.psInfoMapReverse.has(value.PPID)) {
-        (this.psInfoMapReverse.get(value.PPID) as number[]).push(key);
-      } else {
-        this.psInfoMapReverse.set(value.PPID, [key]);
-      }
-    }
+  async renderTreeMap() {
     // 根据PID和PPID的关系构造一颗树
-    this.processTree = this.buildTree(0, -1, this.psInfoMap, this.psInfoMapReverse);
-    if(this.chartMode === 'cpu'){
+    this.processTree = await this.choco.getAsync(`process/tree`) as ProcessNode;
+    if (this.chartMode === 'cpu') {
       this.updateCPUChart();
-    }else{
+    } else {
       this.updateMemoryChart();
     }
   }
   updateCPUChart() {
     // 根据cpuInfo.percent计算空闲CPU使用率，注意核心数
-    if(this.cpuInfo === undefined){
+    if (this.cpuInfo === undefined) {
       return;
     }
     const cpuIdle = 100 * (1 - this.cpuInfo.percent / 100) * this.cpuInfo.logicCores;
@@ -224,26 +142,6 @@ export class TopPanelComponent implements OnInit, OnDestroy {
             borderColor: '#fff'
           },
           leafDepth: this.leafDepth,
-          tooltip: {
-            extraCssText: 'max-width:300px; white-space:pre-line',
-            formatter: (info) => {
-              const name = info.name;
-              const value = info.value;
-              const nameNumber = parseInt(name);
-              let user = this.psInfoMap.get(nameNumber)?.USER;
-              let cmd = this.psInfoMap.get(nameNumber)?.CMD;
-              if (name === 'idle') {
-                user = 'idle';
-                cmd = '';
-              }
-              return [
-                '<div class="tooltip-title">' +
-                user +
-                '</div>',
-                '<div class="tooltip-content">' + value.toString() + '<br/>' + cmd + '</div>'
-              ].join('');
-            }
-          },
           animationDuration: 550,
           animationDurationUpdate: 750
         }
@@ -282,26 +180,6 @@ export class TopPanelComponent implements OnInit, OnDestroy {
             borderColor: '#fff'
           },
           leafDepth: this.leafDepth,
-          tooltip: {
-            extraCssText: 'max-width:300px; white-space:pre-line',
-            formatter: (info) => {
-              const name = info.name;
-              const value = info.value;
-              const nameNumber = parseInt(name);
-              let user = this.psInfoMap.get(nameNumber)?.USER;
-              let cmd = this.psInfoMap.get(nameNumber)?.CMD;
-              if (name === 'idle') {
-                user = 'idle';
-                cmd = '';
-              }
-              return [
-                '<div class="tooltip-title">' +
-                user +
-                '</div>',
-                '<div class="tooltip-content">面积为估算大小<br/>' + cmd + '</div>'
-              ].join('');
-            }
-          },
           animationDuration: 550,
           animationDurationUpdate: 750
         }
@@ -310,11 +188,9 @@ export class TopPanelComponent implements OnInit, OnDestroy {
   }
 
   // 包装树节点，用于生成图表（剪掉小于1的节点）
-  wrapTree(node: ProcessNode, valueType: string): { name: string, value: number, children: any, itemStyle?: any } {
+  wrapTree(node: ProcessNode, valueType: string): { name: string, value: number, children: any, itemStyle?: any, tooltip: any } {
     const valueLabel = valueType === 'cpu' ? 'sum_cpu' : 'sum_mem';
-    const children = node.children.filter(
-      (child) => child[valueLabel] >= 1
-    ).map((child) => {
+    const children = node.children.map((child) => {
       return this.wrapTree(child, valueType);
     });
     let itemStyle = undefined;
@@ -332,33 +208,28 @@ export class TopPanelComponent implements OnInit, OnDestroy {
     return {
       name: node.pid.toString(),
       value: node[valueLabel],
+      tooltip: {
+        extraCssText: 'max-width:300px; white-space:pre-line',
+        formatter: (info: any) => {
+          const name = info.name;
+          const value = info.value;
+          const nameNumber = parseInt(name);
+          let user = node.user;
+          let cmd = node.command;
+          if (name === 'idle') {
+            user = 'idle';
+            cmd = '';
+          }
+          return [
+            '<div class="tooltip-title">' +
+            user +
+            '</div>',
+            '<div class="tooltip-content">' + (valueType === 'cpu' ? value.toString() : "面积为估算大小") + '<br/>' + cmd + '</div>'
+          ].join('');
+        }
+      },
       children: children,
       itemStyle: itemStyle,
     };
-  }
-
-
-  buildTree(pid: number, ppid: number, psInfoMap: Map<number, {
-    'PID': number, 'USER': string, 'PPID': number, '%CPU': number, '%MEM': number, 'CMD': string,
-  }>, psInfoMapReverse: Map<number, number[]>): any {
-    const node: ProcessNode = {
-      pid: pid,
-      ppid: ppid,
-      cpu: psInfoMap.get(pid) ? psInfoMap.get(pid)!['%CPU'] : 0,
-      mem: psInfoMap.get(pid) ? psInfoMap.get(pid)!['%MEM'] : 0,
-      sum_cpu: 0,
-      sum_mem: 0,
-      children: [],
-    };
-    if (psInfoMapReverse.has(pid)) {
-      const pids = psInfoMapReverse.get(pid) as number[];
-      pids.forEach((id) => {
-        const child = this.buildTree(id, pid, psInfoMap, psInfoMapReverse);
-        node.children.push(child);
-        node.sum_cpu += child.sum_cpu + child.cpu;
-        node.sum_mem += child.sum_mem + child.mem;
-      });
-    }
-    return node;
   }
 }

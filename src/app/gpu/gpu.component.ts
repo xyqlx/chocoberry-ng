@@ -45,46 +45,12 @@ export class GpuComponent implements OnInit, OnDestroy {
     this.gpuSubscription.unsubscribe();
   }
   async queryGPU() {
-    const gpus: GPUInfo[] = [];
-    const info: any = await this.choco.getAsync('gpu');
+    const info: any = await this.choco.getAsync('gpu/summary');
     if (!info) {
       return;
     }
     this.cudaVersion = info['cuda_version'];
-    for (const gpu of info['gpu']) {
-      const gpuInfo: GPUInfo = {
-        name: gpu['product_name'],
-        memUsed: this.getNumber(gpu['fb_memory_usage']['used']),
-        memTotal: this.getNumber(gpu['fb_memory_usage']['total']),
-        utilization: this.getNumber(gpu['utilization']['gpu_util']),
-        processes: [],
-      };
-      const processes = gpu['processes'];
-      if (processes !== '\n\t\t') {
-        if (Array.isArray(processes['process_info'])) {
-          for (const p of processes['process_info']) {
-            const pid = Number(p['pid']);
-            try {
-              const process = await this.choco.findProcess(pid);
-              (process as any).usedmemory =
-                this.getNumber(p['used_memory']) ?? 0;
-              gpuInfo.processes.push(process as any);
-            } catch { }
-          }
-        } else {
-          const pid = Number(processes['process_info']['pid']);
-          if (!isNaN(pid)) {
-            try {
-              const process = await this.choco.findProcess(pid);
-              (process as any).usedmemory =
-                this.getNumber(processes['process_info']['used_memory']) ?? 0;
-              gpuInfo.processes.push(process as any);
-            } catch { }
-          }
-        }
-      }
-      gpus.push(gpuInfo);
-    }
+    const gpus = info['gpus'] as GPUInfo[];
     if (this.gpus.length !== gpus.length) {
       this.gpus = gpus;
     } else {
