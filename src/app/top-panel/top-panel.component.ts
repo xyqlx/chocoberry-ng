@@ -192,6 +192,9 @@ export class TopPanelComponent implements OnInit, OnDestroy {
   }
   updateCPUChart() {
     // 根据cpuInfo.percent计算空闲CPU使用率，注意核心数
+    if(this.cpuInfo === undefined){
+      return;
+    }
     const cpuIdle = 100 * (1 - this.cpuInfo.percent / 100) * this.cpuInfo.logicCores;
     // 包装树节点，用于生成图表
     const treeData = this.wrapTree(this.processTree, 'cpu');
