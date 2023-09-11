@@ -17,7 +17,7 @@ export class StatComponent implements OnInit {
     );
     // numbers of gpu
     const gpu = this.data[0].gpu;
-    this.gpuCount = gpu.length;
+    this.gpuCount = gpu.gpus.length;
   }
   async timeChange(event: MatButtonToggleChange) {
     this.data = [];

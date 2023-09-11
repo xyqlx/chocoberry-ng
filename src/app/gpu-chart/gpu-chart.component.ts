@@ -43,11 +43,11 @@ export class GpuChartComponent implements OnInit {
     // ISO format to Date
     const utilization = this._data.map((item) => [
       new Date(item.time),
-      item.gpu[this._gpuIndex!].utilization,
+      item.gpu.gpus[this._gpuIndex!].utilization,
     ]);
     const mem = this._data.map((item) => [
       new Date(item.time),
-      item.gpu[this._gpuIndex!].memUsed / 1024,
+      item.gpu.gpus[this._gpuIndex!].memUsed / 1024,
     ]);
     this.chartOption = {
       tooltip: {
