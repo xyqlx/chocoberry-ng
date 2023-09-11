@@ -1,4 +1,12 @@
-<mat-card class="panel-card">
+<mat-card class="panel-card" *ngIf="!cpuInfo">
+  <mat-card-header><mat-card-title>性能</mat-card-title></mat-card-header>
+  <mat-card-content>
+    <div class="panel-card-loading-spinner">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="panel-card" *ngIf="cpuInfo">
   <mat-card-header
     ><mat-card-title
       >性能{{ this.shouldUpdate ? "" : "（暂停中）" }}</mat-card-title
