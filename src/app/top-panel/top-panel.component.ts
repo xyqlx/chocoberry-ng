@@ -187,9 +187,10 @@ export class TopPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  // 包装树节点，用于生成图表（剪掉小于1的节点）
+  // 包装树节点，用于生成图表
   wrapTree(node: ProcessNode, valueType: string): { name: string, value: number, children: any, itemStyle?: any, tooltip: any } {
-    const valueLabel = valueType === 'cpu' ? 'sum_cpu' : 'sum_mem';
+    const valueLabel = valueType === 'cpu' ? 'cpu' : 'mem';
+    const sumValueLabel = valueType === 'cpu' ? 'sum_cpu' : 'sum_mem';
     const children = node.children.map((child) => {
       return this.wrapTree(child, valueType);
     });
@@ -207,7 +208,7 @@ export class TopPanelComponent implements OnInit, OnDestroy {
     }
     return {
       name: node.pid.toString(),
-      value: node[valueLabel],
+      value: node[valueLabel] + node[sumValueLabel],
       tooltip: {
         extraCssText: 'max-width:300px; white-space:pre-line',
         formatter: (info: any) => {
