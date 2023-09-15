@@ -58,7 +58,7 @@ export class TerminalWindowComponent
         this.term?.write('\r\n*** Disconnected from backend***\r\n');
       });
     };
-    this.socketService.socket.emit('login', this.password);
+    this.socketService.socket.emit('ssh_login', this.password);
     socket.on('connect', action);
   }
 
