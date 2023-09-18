@@ -27,7 +27,7 @@
           }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field *ngIf="trigger.type === 'time'">
         <mat-label>通知时间</mat-label>
         <input
           type="number"

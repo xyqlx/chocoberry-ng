@@ -9,7 +9,7 @@ class Trigger {
 }
 
 const triggerTypes = ['specific_gpu_free', 'time'];
-const notifyTypes = ['email', 'notify'];
+const notifyTypes = ['notify', 'email'];
 
 class SpecificGPUFreeTrigger extends Trigger {
   constructor(

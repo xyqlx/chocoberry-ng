@@ -9,7 +9,7 @@ import { LoginComponent, LOGIN_EVENT } from './login.component';
 export class LoginService {
   constructor(private overlay: Overlay, private injector: Injector) {}
 
-  showLogin() {
+  showLogin(event: () => void = () => {}) {
     const config = new OverlayConfig();
     config.positionStrategy = this.overlay
       .position()
@@ -26,6 +26,7 @@ export class LoginService {
           provide: LOGIN_EVENT,
           useValue: () => {
             overlayRef.dispose(); // 销毁overlay层
+            event();
           },
         },
       ],

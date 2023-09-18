@@ -16,7 +16,7 @@ export class AddTriggerComponent implements OnInit {
     'time',
     1,
     { time: new Date().getTime() },
-    'email',
+    'notify',
     new Date().getTime()
   );
   triggerTypes = triggerTypes;
