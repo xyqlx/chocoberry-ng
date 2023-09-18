@@ -9,5 +9,5 @@ export const initialState: TopChartSettings = {
 
 export const topChartSettingsReducer = createReducer(
   initialState,
-  on(TopChartSettingsActions.setTopchartsettings, (_state, { topChartSettings }) => topChartSettings)
+  on(TopChartSettingsActions.setTopChartSettings, (_state, { topChartSettings }) => topChartSettings)
 );

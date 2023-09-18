@@ -25,10 +25,10 @@ export class SettingsComponent {
   }
   topChartSettings$ = this.store.select(selectTopChartSettings);
   setLeafDepth(value: number) {
-    this.store.dispatch(TopChartSettingsActions.setTopchartsettings({topChartSettings: {leafDepth: value}}));
+    this.store.dispatch(TopChartSettingsActions.setTopChartSettings({topChartSettings: {leafDepth: value}}));
   }
   setTopChartSettings(settings: TopChartSettings) {
-    this.store.dispatch(TopChartSettingsActions.setTopchartsettings({topChartSettings: settings}));
+    this.store.dispatch(TopChartSettingsActions.setTopChartSettings({topChartSettings: settings}));
   }
   get saturation () {
     return this.processColorService.colorGenerator.saturation;
