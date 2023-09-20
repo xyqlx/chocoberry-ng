@@ -3,6 +3,7 @@ import { ChocoService } from '../choco/choco.service';
 import { interval, Subscription } from 'rxjs';
 import { ColorGenerator } from '../color-generator/ColorGenerator';
 import { ProcessColorService } from '../color-generator/process-color.service';
+import { ProcessTrigger } from '../notify/trigger';
 
 declare type GPUInfo = {
   name: string;
@@ -145,5 +146,11 @@ export class GpuComponent implements OnInit, OnDestroy {
       return `${minutes}m`;
     }
     return `${seconds}s`;
+  }
+  addProcessTrigger(processId: number) {
+    const trigger = new ProcessTrigger(processId, 'notify', new Date().getTime());
+    this.choco.postAsync('notify', trigger).then(() => {
+      console.log(`add process ${processId} trigger success`);
+    });
   }
 }

@@ -66,6 +66,16 @@
                 <div *ngIf="process.cwd">cwd={{ process.cwd }}</div>
               </div>
               <div *ngIf="!process">无进程信息</div>
+              <div>
+                <button
+                  mat-raised-button
+                  color="default"
+                  (click)="addProcessTrigger(process.pid)"
+                  title="添加进程结束通知"
+                >
+                  👀
+                </button>
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
