@@ -4,40 +4,39 @@
     <div class="add-trigger-ui">
       <mat-form-field>
         <mat-label>通知类型</mat-label>
-        <mat-select [(value)]="trigger.type">
+        <mat-select [(value)]="trigger.type" (valueChange)="onTriggerTypeChanged($event)">
           <mat-option *ngFor="let type of triggerTypes" [value]="type">{{
-            type
-          }}</mat-option>
+            triggerTypeLabels[type]
+            }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field *ngIf="trigger.type === 'gpu'">
         <mat-label>生效次数</mat-label>
-        <input
-          type="number"
-          matInput
-          placeholder="生效次数"
-          [(ngModel)]="trigger.repeat"
-        />
+        <input type="number" matInput placeholder="生效次数" [(ngModel)]="trigger.repeat" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>通知方式</mat-label>
         <mat-select [(ngModel)]="trigger.notifyType">
           <mat-option *ngFor="let method of notifyTypes" [value]="method">{{
-            method
-          }}</mat-option>
+            notifyTypeLabels[method]
+            }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field *ngIf="trigger.type === 'time'">
-        <mat-label>通知时间</mat-label>
-        <input
-          type="number"
-          matInput
-          placeholder="通知时间"
-          [(ngModel)]="trigger.payload.time"
-        />
+        <mat-label>通知日期</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="timeTriggerDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="addTrigger()">
-        添加
+      <mat-form-field *ngIf="trigger.type === 'process'">
+        <mat-label>进程号</mat-label>
+        <input type="number" matInput placeholder="进程号" [(ngModel)]="trigger.payload.processId" />
+      </mat-form-field>
+      <ngx-mat-timepicker-field [format]="24" [(ngModel)]="timeTriggerTime" *ngIf="trigger.type === 'time'">
+      </ngx-mat-timepicker-field>
+      <button mat-raised-button color="primary" (click)="addTrigger()" [disabled]="loading">
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+        <span *ngIf="!loading">添加</span>
       </button>
     </div>
   </mat-card-content>

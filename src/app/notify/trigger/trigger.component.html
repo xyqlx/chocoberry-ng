@@ -1,1 +1,10 @@
-<p>trigger works!</p>
+<mat-card>
+    <mat-card-header><mat-card-title>{{created}}</mat-card-title></mat-card-header>
+    <mat-card-content>
+      <div>通知类型：{{ triggerTypeLabels[trigger.type] }}</div>
+      <div>通知方式：{{ notifyTypeLabels[trigger.notifyType] }}</div>
+      <div>生效次数：{{ trigger.repeat }}</div>
+      <div *ngIf="trigger.type === 'time'">通知时间：{{ timeTriggerTime }}</div>
+      <div *ngIf="trigger.type === 'process'">监视进程：{{ trigger.payload.processId }}</div>
+    </mat-card-content>
+  </mat-card>

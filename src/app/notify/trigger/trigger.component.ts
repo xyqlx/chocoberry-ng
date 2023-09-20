@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Trigger } from '../trigger';
+import { Trigger, triggerTypeLabels, notifyTypeLabels } from '../trigger';
 
 @Component({
   selector: 'app-trigger',
@@ -9,6 +9,9 @@ import { Trigger } from '../trigger';
 export class TriggerComponent implements OnInit {
   constructor() {}
 
+  triggerTypeLabels = triggerTypeLabels;
+  notifyTypeLabels = notifyTypeLabels;
+
   @Input() trigger: Trigger = new Trigger(
     'time',
     1,
@@ -16,6 +19,14 @@ export class TriggerComponent implements OnInit {
     'email',
     new Date().getTime()
   );
+
+  get created() {
+    return new Date(this.trigger.created).toLocaleString();
+  }
+
+  get timeTriggerTime() {
+    return new Date(this.trigger.payload.time).toLocaleString();
+  }
 
   ngOnInit(): void {}
 }

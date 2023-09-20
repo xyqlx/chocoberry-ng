@@ -1,30 +1,39 @@
+// define trigger type
+type TriggerType = 'time' | 'gpu' | 'process';
+type NotifyType = 'notify' | 'email';
+
 class Trigger {
   constructor(
-    public type: string,
+    public type: TriggerType,
     public repeat: number,
     public payload: any,
-    public notifyType: string,
+    public notifyType: NotifyType,
     public created: number
   ) {}
 }
 
-const triggerTypes = ['specific_gpu_free', 'time'];
-const notifyTypes = ['notify', 'email'];
+const triggerTypes: TriggerType[] = ['gpu', 'time', 'process'];
+const notifyTypes: NotifyType[] = ['notify', 'email'];
+const triggerTypeLabels = {
+  gpu: '显卡占用变动',
+  time: '定时',
+  process: '进程结束'
+}
+const notifyTypeLabels = {
+  notify: '浏览器通知',
+  email: '邮件',
+}
 
-class SpecificGPUFreeTrigger extends Trigger {
+class GPUTrigger extends Trigger {
   constructor(
-    userId: string,
     repeat: number,
-    gpuIndex: number,
-    notifyType: string,
+    notifyType: NotifyType,
     created: number
   ) {
     super(
-      'specific_gpu_free',
+      'gpu',
       repeat,
-      {
-        gpuIndex,
-      },
+      {},
       notifyType,
       created
     );
@@ -33,12 +42,29 @@ class SpecificGPUFreeTrigger extends Trigger {
 
 class TimeTrigger extends Trigger {
   constructor(
-    repeat: number,
     time: number,
-    notifyType: string,
+    notifyType: NotifyType,
     created: number
   ) {
-    super('time', repeat, { time }, notifyType, created);
+    super('time', 1, { time }, notifyType, created);
+  }
+}
+
+class ProcessTrigger extends Trigger {
+  constructor(
+    processId: number,
+    notifyType: NotifyType,
+    created: number
+  ) {
+    super(
+      'process',
+      1,
+      {
+        processId,
+      },
+      notifyType,
+      created
+    );
   }
 }
 
@@ -46,6 +72,9 @@ export {
   Trigger,
   triggerTypes,
   notifyTypes,
-  SpecificGPUFreeTrigger,
+  triggerTypeLabels,
+  notifyTypeLabels,
+  GPUTrigger,
   TimeTrigger,
+  ProcessTrigger
 };

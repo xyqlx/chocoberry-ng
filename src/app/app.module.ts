@@ -49,6 +49,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { topChartSettingsReducer } from './state/top-chart-settings.reducer';
 import { StoreModule } from '@ngrx/store';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { triggerReducer } from './notify/store/trigger.reducer';
 
 @NgModule({
   declarations: [
@@ -110,16 +114,23 @@ import { StoreModule } from '@ngrx/store';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
-    StoreModule.forRoot({ topChartSettings: topChartSettingsReducer }),
+    StoreModule.forRoot({ topChartSettings: topChartSettingsReducer, trigger: triggerReducer }),
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     FormsModule,
     DialogModule,
     MatSliderModule,
-    MatGridListModule
+    MatGridListModule,
+    NgxMatTimepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'zh-CN'
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
