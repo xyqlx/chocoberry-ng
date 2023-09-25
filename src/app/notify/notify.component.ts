@@ -23,6 +23,7 @@ export class NotifyComponent implements OnInit, OnDestroy {
   refreshTriggers() {
     this.choco.getAsync('notify').then((triggers: Object) => {
       this.triggers = triggers as Trigger[];
+      this.loading = false;
     });
   }
 
@@ -39,7 +40,7 @@ export class NotifyComponent implements OnInit, OnDestroy {
   addTrigger(trigger: Trigger) {
     this.loading = true;
     this.choco.postAsync('notify', trigger).then(() => {
-      this.loading = false;
+      // this.loading = false;
     });
   }
 
