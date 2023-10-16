@@ -62,6 +62,9 @@ export class AuthService {
     return this.http.post(this.base + 'auth/registerState', { isOpen });
   }
   public get loggedIn(): boolean {
+    if(environment.demo){
+      return true;
+    }
     const token = localStorage.getItem('access_token');
     // 输出凭证过期时间
     // console.log(this.jwtHelper.getTokenExpirationDate(token ?? undefined));
