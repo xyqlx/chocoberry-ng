@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve --port 37374",
     "build": "ng build --base-href /ui",
+    "build:demo": "ng build --configuration demo",
+    "start:demo": "ng serve --configuration demo --port 37374",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "pretty": "prettier --write \"./src/app/**/*.{ts,tsx,html,json}\""
@@ -44,7 +46,11 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "msw": "^1.3.2",
     "prettier": "^2.8.7",
     "typescript": "^4.9.5"
+  },
+  "msw": {
+    "workerDirectory": "src"
   }
 }

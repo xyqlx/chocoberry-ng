@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SocketService } from '../socket/socket.service';
 import { update } from "./store/trigger.actions";
 import { Store } from '@ngrx/store';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class NotifyService {
   ) {}
 
   connect() {
+    if(environment.demo){
+      return;
+    }
     const socket = this.socketService.socket;
     socket.on('connect', () => {
       console.log('notify socket connected');

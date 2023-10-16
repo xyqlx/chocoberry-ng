@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -12,6 +13,9 @@ export class UserComponent implements OnInit {
   userInfo?: { name: string; linuxUser: string; email: string };
   isOpenRegister = false;
   permissions: string[] = [];
+
+  demo = environment.demo;
+
   ngOnInit(): void {
     this.authService.getUserInfo().subscribe((x) => {
       this.userInfo = x as { name: string; linuxUser: string; email: string };

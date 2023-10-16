@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { NotifyComponent } from './notify/notify.component';
 import { StatComponent } from './stat/stat.component';
 import { UserComponent } from './user/user.component';
+import { environment } from './../environments/environment';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: environment.demo })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
