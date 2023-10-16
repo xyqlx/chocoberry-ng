@@ -56,7 +56,7 @@ export const handlers = [
             })
         )
     }),
-    rest.get('net-traffic', (req, res, ctx) => {
+    rest.get('/net-traffic', (req, res, ctx) => {
         const sent = Math.random() * 100;
         const received = Math.random() * 100;
         return res(
@@ -74,7 +74,7 @@ export const handlers = [
             ])
         )
     }),
-    rest.get('gpu/summary', (req, res, ctx) => {
+    rest.get('/gpu/summary', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json({
@@ -126,7 +126,7 @@ export const handlers = [
             })
         )
     }),
-    rest.get('cpu', (req, res, ctx) => {
+    rest.get('/cpu', (req, res, ctx) => {
         const percent = Math.random() * 10 + 5;
         return res(
             ctx.status(200),
@@ -137,7 +137,7 @@ export const handlers = [
             })
         )
     }),
-    rest.get('memory', (req, res, ctx) => {
+    rest.get('/memory', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json({
@@ -146,7 +146,7 @@ export const handlers = [
             })
         )
     }),
-    rest.get('tasks/log/performance', (req, res, ctx) => {
+    rest.get('/tasks/log/performance', (req, res, ctx) => {
         // get days and sampleInterval from query
         const days = req.url.searchParams.get('days');
         const sampleInterval = req.url.searchParams.get('sampleInterval');
@@ -243,7 +243,7 @@ export const handlers = [
             ctx.json(data)
         );
     }),
-    rest.get('notify', (req, res, ctx) => {
+    rest.get('/notify', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json([
@@ -268,7 +268,7 @@ export const handlers = [
             ])
         )
     }),
-    rest.get('auth/userinfo', (req, res, ctx) => {
+    rest.get('/auth/userinfo', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json({
@@ -278,7 +278,7 @@ export const handlers = [
             })
         )
     }),
-    rest.get('auth/permissions', (req, res, ctx) => {
+    rest.get('/auth/permissions', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json([
