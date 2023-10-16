@@ -11,12 +11,12 @@ if (environment.production) {
 if (environment.demo) {
   import('./mocks/browser').then(({ worker }) => {
     // get base href
-    const baseHref = document.querySelector('base')?.getAttribute('href') ?? '/';
+    // const baseHref = document.querySelector('base')?.getAttribute('href') ?? '/';
     // trim left slash
-    const workerBaseHref = baseHref.replace(/^\//, '');
+    // const workerBaseHref = baseHref.replace(/^\//, '');
     worker.start({
       serviceWorker: {
-        url: `${workerBaseHref}/mockServiceWorker.js`,
+        url: `mockServiceWorker.js`,
       },
     });
     platformBrowserDynamic().bootstrapModule(AppModule)
